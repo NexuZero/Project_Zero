@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#6366F1" />
+    <meta name="description" content="Project Zero — an offline-first idea engine that turns a field, niche, and problem into structured open-source project concepts. No account, no cloud AI, no tracking." />
+    <link rel="icon" type="image/svg+xml" href="/icons/icon-192.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>Project Zero — Turn problems into projects</title>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem("pz.preferences");
+          var theme = raw ? JSON.parse(raw).theme : "system";
+          var isDark = theme === "dark" || (theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          if (isDark) document.documentElement.classList.add("dark");
+        } catch (e) {
+          /* localStorage may be unavailable (private mode); default to light. */
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-bg text-ink dark:bg-bg-dark dark:text-ink-dark antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

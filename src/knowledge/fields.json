@@ -1,0 +1,106 @@
+[
+  {
+    "id": "applied-ai",
+    "name": "Applied AI",
+    "description": "Practical AI/ML systems and the tooling that operates them.",
+    "keywords": ["ai", "agent", "agents", "llm", "model", "models", "machine learning", "ml", "inference", "prompt", "rag", "embedding", "chatbot", "copilot"],
+    "domainWords": ["Agent", "Model", "Prompt", "Inference", "Copilot"],
+    "defaultAudiences": ["ai-teams", "it-ops-teams", "startup-founders"]
+  },
+  {
+    "id": "cybersecurity",
+    "name": "Cybersecurity",
+    "description": "Protecting systems, data, and people from threats and misuse.",
+    "keywords": ["security", "threat", "attack", "vulnerability", "phishing", "breach", "malware", "exploit", "incident", "compliance", "risk"],
+    "domainWords": ["Threat", "Risk", "Shield", "Guard", "Vuln"],
+    "defaultAudiences": ["security-teams", "small-business-owners", "compliance-officers"]
+  },
+  {
+    "id": "devops",
+    "name": "DevOps",
+    "description": "Building, shipping, and operating software reliably.",
+    "keywords": ["deploy", "deployment", "pipeline", "ci", "cd", "infrastructure", "release", "build", "container", "orchestration", "rollback"],
+    "domainWords": ["Pipeline", "Deploy", "Release", "Build", "Infra"],
+    "defaultAudiences": ["platform-teams", "solo-developers", "it-ops-teams"]
+  },
+  {
+    "id": "it-operations",
+    "name": "IT Operations",
+    "description": "Keeping internal systems, devices, and services running.",
+    "keywords": ["uptime", "outage", "asset", "inventory", "ticket", "helpdesk", "endpoint", "patch", "service desk", "sla"],
+    "domainWords": ["Ops", "Asset", "Fleet", "Desk", "Uptime"],
+    "defaultAudiences": ["it-ops-teams", "remote-teams", "enterprise-it"]
+  },
+  {
+    "id": "education",
+    "name": "Education",
+    "description": "Helping people learn, teach, and track progress.",
+    "keywords": ["learn", "learning", "student", "teacher", "course", "curriculum", "classroom", "study", "quiz", "grading"],
+    "domainWords": ["Learn", "Class", "Study", "Curriculum", "Grade"],
+    "defaultAudiences": ["educators", "students", "researchers"]
+  },
+  {
+    "id": "healthcare",
+    "name": "Healthcare",
+    "description": "Supporting care delivery, patient outcomes, and clinical operations.",
+    "keywords": ["patient", "clinical", "care", "provider", "appointment", "record", "diagnosis", "wellness", "hipaa"],
+    "domainWords": ["Care", "Patient", "Clinic", "Wellness", "Record"],
+    "defaultAudiences": ["healthcare-providers", "clinic-admins", "patients"]
+  },
+  {
+    "id": "productivity",
+    "name": "Productivity",
+    "description": "Helping individuals and teams get more done with less friction.",
+    "keywords": ["productivity", "focus", "task", "workflow", "planning", "time", "prioritize", "distraction", "habit"],
+    "domainWords": ["Focus", "Flow", "Task", "Plan", "Time"],
+    "defaultAudiences": ["remote-teams", "solo-developers", "freelancers"]
+  },
+  {
+    "id": "data",
+    "name": "Data",
+    "description": "Collecting, transforming, and making sense of data.",
+    "keywords": ["data", "dataset", "pipeline", "etl", "analytics", "query", "warehouse", "schema", "transform"],
+    "domainWords": ["Data", "Pipeline", "Query", "Schema", "Insight"],
+    "defaultAudiences": ["data-analysts", "researchers", "startup-founders"]
+  },
+  {
+    "id": "networking",
+    "name": "Networking",
+    "description": "Connecting, routing, and observing traffic between systems.",
+    "keywords": ["network", "latency", "bandwidth", "router", "dns", "packet", "topology", "firewall", "vpn"],
+    "domainWords": ["Net", "Link", "Route", "Traffic", "Node"],
+    "defaultAudiences": ["it-ops-teams", "platform-teams", "field-technicians"]
+  },
+  {
+    "id": "automation",
+    "name": "Automation",
+    "description": "Removing manual, repetitive work from a process.",
+    "keywords": ["automate", "automation", "manual", "repetitive", "trigger", "workflow", "rule", "scheduled", "batch"],
+    "domainWords": ["Auto", "Flow", "Trigger", "Rule", "Batch"],
+    "defaultAudiences": ["solo-developers", "small-business-owners", "remote-teams"]
+  },
+  {
+    "id": "developer-tools",
+    "name": "Developer Tools",
+    "description": "Tooling that makes building software faster and less painful.",
+    "keywords": ["developer", "dev", "cli", "sdk", "api", "debug", "boilerplate", "scaffold", "lint", "editor"],
+    "domainWords": ["Dev", "Kit", "Forge", "Scaffold", "Build"],
+    "defaultAudiences": ["solo-developers", "open-source-maintainers", "platform-teams"]
+  },
+  {
+    "id": "finance",
+    "name": "Finance",
+    "description": "Managing money, budgets, invoices, and financial visibility.",
+    "keywords": ["finance", "budget", "invoice", "expense", "payment", "ledger", "accounting", "revenue", "billing"],
+    "domainWords": ["Ledger", "Budget", "Invoice", "Spend", "Book"],
+    "defaultAudiences": ["small-business-owners", "freelancers", "nonprofits"]
+  },
+  {
+    "id": "accessibility",
+    "name": "Accessibility",
+    "description": "Making digital and physical experiences usable by everyone.",
+    "keywords": ["accessibility", "a11y", "screen reader", "contrast", "wcag", "inclusive", "disability", "caption"],
+    "domainWords": ["Access", "Inclusive", "Aria", "Clarity", "Reach"],
+    "defaultAudiences": ["educators", "content-creators", "compliance-officers"]
+  }
+]

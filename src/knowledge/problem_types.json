@@ -1,0 +1,190 @@
+[
+  {
+    "id": "automation",
+    "name": "Automation",
+    "description": "Removing manual, repetitive steps from a process.",
+    "keywords": [
+      { "term": "manually", "weight": 3 }, { "term": "manual", "weight": 2 }, { "term": "repetitive", "weight": 3 },
+      { "term": "time consuming", "weight": 3 }, { "term": "time-consuming", "weight": 3 }, { "term": "tedious", "weight": 2 },
+      { "term": "by hand", "weight": 2 }, { "term": "every time", "weight": 1 }, { "term": "busywork", "weight": 2 },
+      { "term": "repeat", "weight": 1 }, { "term": "routine", "weight": 1 }, { "term": "error-prone", "weight": 2 }
+    ]
+  },
+  {
+    "id": "monitoring",
+    "name": "Monitoring",
+    "description": "Knowing the current state of a system, service, or process.",
+    "keywords": [
+      { "term": "don't know status", "weight": 3 }, { "term": "visibility", "weight": 3 }, { "term": "health", "weight": 2 },
+      { "term": "uptime", "weight": 3 }, { "term": "real-time", "weight": 1 }, { "term": "status", "weight": 2 },
+      { "term": "no idea", "weight": 2 }, { "term": "dashboard", "weight": 1 }, { "term": "observability", "weight": 3 },
+      { "term": "alerting", "weight": 2 }, { "term": "down", "weight": 1 }
+    ]
+  },
+  {
+    "id": "detection",
+    "name": "Detection",
+    "description": "Identifying malicious, anomalous, or risky activity.",
+    "keywords": [
+      { "term": "attack", "weight": 3 }, { "term": "threat", "weight": 3 }, { "term": "phishing", "weight": 3 },
+      { "term": "vulnerability", "weight": 3 }, { "term": "malicious", "weight": 2 }, { "term": "suspicious", "weight": 2 },
+      { "term": "exploit", "weight": 2 }, { "term": "intrusion", "weight": 2 }, { "term": "anomaly", "weight": 2 },
+      { "term": "scan", "weight": 1 }, { "term": "malware", "weight": 3 }
+    ]
+  },
+  {
+    "id": "organization",
+    "name": "Organization",
+    "description": "Bringing structure to scattered information or work.",
+    "keywords": [
+      { "term": "scattered", "weight": 3 }, { "term": "disorganized", "weight": 3 }, { "term": "everywhere", "weight": 2 },
+      { "term": "spreadsheets", "weight": 2 }, { "term": "chaos", "weight": 2 }, { "term": "no single place", "weight": 3 },
+      { "term": "centralize", "weight": 2 }, { "term": "misplaced", "weight": 1 }, { "term": "structure", "weight": 1 }
+    ]
+  },
+  {
+    "id": "productivity",
+    "name": "Productivity",
+    "description": "Reducing friction and wasted time in day-to-day work.",
+    "keywords": [
+      { "term": "distraction", "weight": 2 }, { "term": "focus", "weight": 2 }, { "term": "efficiency", "weight": 1 },
+      { "term": "wasted time", "weight": 3 }, { "term": "slow", "weight": 1 }, { "term": "overwhelmed", "weight": 2 },
+      { "term": "too many tools", "weight": 3 }, { "term": "context switching", "weight": 3 }, { "term": "burnout", "weight": 2 }
+    ]
+  },
+  {
+    "id": "security",
+    "name": "Security",
+    "description": "Protecting access, data, and systems from misuse.",
+    "keywords": [
+      { "term": "breach", "weight": 3 }, { "term": "unauthorized access", "weight": 3 }, { "term": "compliance", "weight": 2 },
+      { "term": "risk", "weight": 1 }, { "term": "exposed", "weight": 2 }, { "term": "weak passwords", "weight": 2 },
+      { "term": "permissions", "weight": 2 }, { "term": "access control", "weight": 3 }
+    ]
+  },
+  {
+    "id": "documentation",
+    "name": "Documentation",
+    "description": "Capturing and surfacing knowledge that currently lives only in people's heads.",
+    "keywords": [
+      { "term": "undocumented", "weight": 3 }, { "term": "outdated docs", "weight": 3 }, { "term": "no documentation", "weight": 3 },
+      { "term": "tribal knowledge", "weight": 3 }, { "term": "hard to find information", "weight": 2 }, { "term": "onboarding takes too long", "weight": 2 },
+      { "term": "knowledge silo", "weight": 2 }, { "term": "docs", "weight": 1 }
+    ]
+  },
+  {
+    "id": "analysis",
+    "name": "Analysis",
+    "description": "Turning raw data into understanding.",
+    "keywords": [
+      { "term": "insights", "weight": 2 }, { "term": "understand trends", "weight": 3 }, { "term": "make sense of", "weight": 2 },
+      { "term": "patterns", "weight": 2 }, { "term": "reporting", "weight": 1 }, { "term": "don't know why", "weight": 3 },
+      { "term": "root cause", "weight": 3 }, { "term": "metrics", "weight": 1 }
+    ]
+  },
+  {
+    "id": "communication",
+    "name": "Communication",
+    "description": "Making sure the right information reaches the right people.",
+    "keywords": [
+      { "term": "miscommunication", "weight": 3 }, { "term": "silos", "weight": 2 }, { "term": "don't know what's happening", "weight": 3 },
+      { "term": "updates get lost", "weight": 3 }, { "term": "email chains", "weight": 2 }, { "term": "notifications", "weight": 1 },
+      { "term": "out of the loop", "weight": 2 }
+    ]
+  },
+  {
+    "id": "collaboration",
+    "name": "Collaboration",
+    "description": "Helping people work together across roles or teams.",
+    "keywords": [
+      { "term": "working together", "weight": 2 }, { "term": "shared context", "weight": 2 }, { "term": "handoffs", "weight": 3 },
+      { "term": "coordination", "weight": 2 }, { "term": "cross-team", "weight": 2 }, { "term": "feedback loop", "weight": 2 },
+      { "term": "review process", "weight": 2 }
+    ]
+  },
+  {
+    "id": "visualization",
+    "name": "Visualization",
+    "description": "Representing complex data so it can be understood at a glance.",
+    "keywords": [
+      { "term": "hard to see", "weight": 2 }, { "term": "can't visualize", "weight": 3 }, { "term": "charts", "weight": 1 },
+      { "term": "no overview", "weight": 2 }, { "term": "complex data", "weight": 2 }, { "term": "graphs", "weight": 1 }
+    ]
+  },
+  {
+    "id": "management",
+    "name": "Management",
+    "description": "Assigning ownership and keeping work accountable.",
+    "keywords": [
+      { "term": "ownership", "weight": 3 }, { "term": "who owns this", "weight": 3 }, { "term": "accountability", "weight": 2 },
+      { "term": "oversight", "weight": 2 }, { "term": "assign", "weight": 2 }, { "term": "prioritize", "weight": 1 }
+    ]
+  },
+  {
+    "id": "tracking",
+    "name": "Tracking",
+    "description": "Keeping a reliable record of status and history over time.",
+    "keywords": [
+      { "term": "lost track of", "weight": 3 }, { "term": "don't know where", "weight": 2 }, { "term": "status unclear", "weight": 2 },
+      { "term": "follow up", "weight": 2 }, { "term": "progress", "weight": 1 }, { "term": "history", "weight": 1 },
+      { "term": "audit trail", "weight": 2 }
+    ]
+  },
+  {
+    "id": "education",
+    "name": "Education",
+    "description": "Helping people learn or teach more effectively.",
+    "keywords": [
+      { "term": "learning curve", "weight": 2 }, { "term": "hard to learn", "weight": 2 }, { "term": "don't understand", "weight": 2 },
+      { "term": "training", "weight": 2 }, { "term": "skill gap", "weight": 2 }, { "term": "curriculum", "weight": 2 }
+    ]
+  },
+  {
+    "id": "accessibility",
+    "name": "Accessibility",
+    "description": "Making something usable for people who currently can't use it.",
+    "keywords": [
+      { "term": "not accessible", "weight": 3 }, { "term": "screen reader", "weight": 3 }, { "term": "exclude", "weight": 2 },
+      { "term": "hard to use for", "weight": 2 }, { "term": "wcag", "weight": 3 }, { "term": "inclusive", "weight": 1 },
+      { "term": "disability", "weight": 2 }
+    ]
+  },
+  {
+    "id": "integration",
+    "name": "Integration",
+    "description": "Connecting tools and systems that don't talk to each other.",
+    "keywords": [
+      { "term": "doesn't talk to", "weight": 3 }, { "term": "disconnected tools", "weight": 3 }, { "term": "manual data entry", "weight": 2 },
+      { "term": "no api", "weight": 2 }, { "term": "siloed systems", "weight": 2 }, { "term": "sync", "weight": 1 }
+    ]
+  },
+  {
+    "id": "reliability",
+    "name": "Reliability",
+    "description": "Making a system trustworthy and predictable under real conditions.",
+    "keywords": [
+      { "term": "flaky", "weight": 3 }, { "term": "keeps failing", "weight": 3 }, { "term": "downtime", "weight": 2 },
+      { "term": "unreliable", "weight": 3 }, { "term": "breaks often", "weight": 2 }, { "term": "unstable", "weight": 2 },
+      { "term": "crashes", "weight": 2 }, { "term": "outages", "weight": 2 }
+    ]
+  },
+  {
+    "id": "privacy",
+    "name": "Privacy",
+    "description": "Protecting personal or sensitive data and how it's used.",
+    "keywords": [
+      { "term": "sensitive data", "weight": 3 }, { "term": "exposed data", "weight": 3 }, { "term": "no consent", "weight": 2 },
+      { "term": "tracked without", "weight": 2 }, { "term": "pii", "weight": 3 }, { "term": "data leak", "weight": 3 }
+    ]
+  },
+  {
+    "id": "developer-experience",
+    "name": "Developer Experience",
+    "description": "Reducing friction in how developers build, test, and ship.",
+    "keywords": [
+      { "term": "slow dev loop", "weight": 3 }, { "term": "hard to set up", "weight": 2 }, { "term": "painful workflow", "weight": 2 },
+      { "term": "boilerplate", "weight": 2 }, { "term": "friction", "weight": 1 }, { "term": "onboarding devs", "weight": 2 },
+      { "term": "poor tooling", "weight": 2 }, { "term": "debugging is hard", "weight": 2 }
+    ]
+  }
+]

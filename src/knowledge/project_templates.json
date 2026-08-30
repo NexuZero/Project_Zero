@@ -1,0 +1,268 @@
+{
+  "automation": {
+    "taglines": ["{Field} automation that removes the manual grind.", "Turns repetitive {niche} work into a rule you set once.", "Set the rule once. Stop doing {niche} by hand."],
+    "why": [
+      "Teams in {field} still do this by hand: {problem} That works until volume grows, and then it quietly becomes the bottleneck nobody scheduled time for.",
+      "\"{problem}\" is exactly the kind of repetitive work that should never require a human in the loop every single time.",
+      "{targetUsers} didn't sign up to be the manual trigger for a process that could run itself. Every repetition is time that should have gone somewhere else."
+    ],
+    "solution": [
+      "{name} lets {targetUsers} define a trigger and a set of rules once, then runs the routine automatically — with an approval step and a full log for anything that shouldn't run unattended.",
+      "{name} watches for the conditions that used to require manual action, applies the right rule, and leaves an audit trail so the automation stays trustworthy, not opaque.",
+      "{name} turns the manual steps in {niche} into a scheduled, rule-based workflow, with rollback built in for when a rule needs to be undone."
+    ],
+    "githubDesc": ["Open-source automation for {field} — turns \"{problem}\" into a rule that runs itself."]
+  },
+  "monitoring": {
+    "taglines": ["Always know the real status of your {niche}.", "A live health view for {field}, without the guesswork.", "Stop asking. Start watching {niche}."],
+    "why": [
+      "Right now: {problem} That's a visibility gap, and visibility gaps turn into incidents nobody saw coming.",
+      "{targetUsers} shouldn't have to ask around to find out if something is healthy. That question should have a dashboard, not a Slack thread.",
+      "By the time {targetUsers} notice something is wrong in {niche}, it's usually already been wrong for a while. Status should be visible, not discovered."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} a single live dashboard of status and health, with alerts the moment something drifts out of range, and history so past incidents are never a mystery.",
+      "{name} continuously checks the things that matter in {field}, surfaces the current state at a glance, and pages the right person only when it's actually necessary.",
+      "{name} tracks health metrics for {niche} in real time and keeps a running history, so \"is it up?\" always has a fast, confident answer."
+    ],
+    "githubDesc": ["Lightweight open-source health dashboard for {field} — status, alerts, and history in one place."]
+  },
+  "detection": {
+    "taglines": ["Catch the {niche} threats before they escalate.", "Local, offline detection for {field}.", "See {niche} risk before it becomes an incident."],
+    "why": [
+      "{problem} By the time a human notices, the damage is usually already done. Detection needs to happen earlier, and it needs to happen automatically.",
+      "{targetUsers} are stretched thin, and manual triage doesn't scale. What's needed is a system that flags risk continuously, not a checklist run once a quarter.",
+      "Every hour between something suspicious happening in {niche} and someone noticing is an hour of unmanaged risk. That gap is what detection tooling should close."
+    ],
+    "solution": [
+      "{name} scans continuously, classifies what it finds against known risk patterns, assigns a risk score, and keeps a full history so nothing gets missed twice.",
+      "{name} runs detection rules against real activity in {field}, raises an alert with a clear risk score, and generates a report {targetUsers} can act on immediately.",
+      "{name} continuously classifies {niche} activity, flags what looks risky with a clear score, and keeps every flagged event on record for review."
+    ],
+    "githubDesc": ["Open-source detection engine for {field} — scans, scores risk, and alerts. Runs entirely locally."]
+  },
+  "organization": {
+    "taglines": ["Bring order to scattered {niche} information.", "One structured place for {field}, instead of ten.", "Stop hunting for {niche} across five tools."],
+    "why": [
+      "{problem} Information that lives in five different places is information nobody can actually trust or find.",
+      "{targetUsers} keep rebuilding the same context because nothing about {niche} has a single source of truth.",
+      "Scattered information isn't just inconvenient — it's how the same {niche} mistake gets made twice, because nobody could find the first one."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} one structured place to capture, tag, and search everything related to {niche}, with filters and bulk actions so it stays usable as it grows.",
+      "{name} replaces scattered spreadsheets and notes with structured, searchable records — so finding the right thing takes seconds, not a Slack search.",
+      "{name} centralizes {niche} information into one structured, taggable system, so {targetUsers} stop rebuilding context that already existed somewhere else."
+    ],
+    "githubDesc": ["Open-source organizer for {field} — one structured, searchable place instead of scattered files."]
+  },
+  "productivity": {
+    "taglines": ["Cut the friction out of {niche} work.", "Fewer tools, more focus, for {field}.", "Less switching. More {niche} actually getting done."],
+    "why": [
+      "{problem} Every extra click and every extra tool is time that isn't going toward the actual work.",
+      "{targetUsers} lose real hours every week to context switching that a better default workflow would simply remove.",
+      "The problem with {niche} isn't effort — it's friction. Every unnecessary step between an idea and it being done adds up fast."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} a fast, focused way to capture and prioritize {niche} work, with a daily summary so nothing important slips through.",
+      "{name} strips the workflow down to what actually matters, reducing the number of tools and clicks between an idea and it getting done.",
+      "{name} gives {targetUsers} one focused place to plan {niche} work, cutting out the tool-switching that eats real, productive hours."
+    ],
+    "githubDesc": ["Open-source productivity tool for {field} — less tool-switching, more finished work."]
+  },
+  "security": {
+    "taglines": ["Practical access control for {niche}.", "Know exactly who can touch what in {field}.", "Access policy for {niche}, enforced, not assumed."],
+    "why": [
+      "{problem} Access that nobody reviews is access that eventually gets misused, intentionally or not.",
+      "{targetUsers} need a clear, current answer to \"who has access to what\" — not an org chart from two reorgs ago.",
+      "In {niche}, permissions tend to only get added, never removed. Over time that turns into risk nobody chose on purpose."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} policy-based access rules, an audit log of every change, and compliance-ready reports on demand.",
+      "{name} continuously checks access against policy in {field} and flags drift before it becomes a compliance finding.",
+      "{name} enforces access policy for {niche} automatically and logs every change, so {targetUsers} always have a current, defensible answer."
+    ],
+    "githubDesc": ["Open-source access and policy tool for {field} — rules, audit log, compliance reports."]
+  },
+  "documentation": {
+    "taglines": ["Turn tribal {niche} knowledge into real docs.", "Documentation that stays current for {field}.", "Write it down once. Find it every time."],
+    "why": [
+      "{problem} Undocumented systems don't get safer over time — they just get harder to onboard someone new into.",
+      "{targetUsers} keep re-explaining the same things because none of it was ever written down in a place people actually check.",
+      "Knowledge that only lives in one person's head about {niche} is one departure away from being lost entirely."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} structured templates for capturing {niche} knowledge, full version history, and search that actually finds the right page.",
+      "{name} turns ad hoc notes into structured, versioned documentation that's easy to write and even easier to find later.",
+      "{name} makes writing {niche} documentation a five-minute structured form instead of a blank page, then keeps every version searchable."
+    ],
+    "githubDesc": ["Open-source documentation tool for {field} — structured templates, search, and version history."]
+  },
+  "analysis": {
+    "taglines": ["Understand your {niche} data, not just collect it.", "Turn {field} data into a clear answer.", "From raw {niche} data to a real answer."],
+    "why": [
+      "{problem} Raw data without analysis is just noise sitting in a table nobody looks at twice.",
+      "{targetUsers} need to know *why*, not just *what* — and that gap is exactly where good analysis tooling belongs.",
+      "{targetUsers} are collecting plenty of data about {niche} already. The gap is turning it into something anyone can actually act on."
+    ],
+    "solution": [
+      "{name} imports {niche} data, runs it through a small set of transformations, and surfaces the insight {targetUsers} actually need — with an export for reporting.",
+      "{name} turns raw {field} data into readable trends and a short list of the metrics that actually moved.",
+      "{name} transforms {niche} data into a short, readable set of insights, so {targetUsers} spend time deciding, not digging."
+    ],
+    "githubDesc": ["Open-source analysis tool for {field} — import, transform, and surface the insight that matters."]
+  },
+  "communication": {
+    "taglines": ["Make sure {niche} updates actually reach people.", "One reliable channel for {field} updates.", "Updates that land, not updates that get lost."],
+    "why": [
+      "{problem} Important updates that live in someone's inbox might as well not exist for everyone else.",
+      "{targetUsers} find out about changes too late, not because nobody said anything, but because it said in the wrong place.",
+      "In {niche}, the information usually exists — it just doesn't reliably reach the people who need it, when they need it."
+    ],
+    "solution": [
+      "{name} routes {niche} updates through the right channel automatically, keeps a searchable history, and makes sure the right people are notified — no more, no less.",
+      "{name} gives {targetUsers} one place where {field} updates land reliably, with threading so context never gets lost.",
+      "{name} makes sure every {niche} update reaches the right person through the right channel, with a searchable record of what was said and when."
+    ],
+    "githubDesc": ["Open-source communication tool for {field} — the right update, to the right person, on record."]
+  },
+  "collaboration": {
+    "taglines": ["Give {niche} work a real shared workspace.", "Handoffs that don't lose context, for {field}.", "Work on {niche} together, without losing the thread."],
+    "why": [
+      "{problem} Every handoff without shared context is a chance for something important to get dropped.",
+      "{targetUsers} are working on the same thing from different angles, but nothing today gives them a shared view of it.",
+      "{niche} work rarely has one owner start to finish — it moves between people. Right now, context doesn't move with it."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} a shared workspace with comments, permissions, and an activity feed, so handoffs carry their context with them.",
+      "{name} keeps {niche} collaborators aligned with a visible activity feed and structured review, instead of scattered messages.",
+      "{name} gives {niche} work a shared home with comments and an activity feed, so context survives every handoff between {targetUsers}."
+    ],
+    "githubDesc": ["Open-source collaboration workspace for {field} — shared context, not scattered messages."]
+  },
+  "visualization": {
+    "taglines": ["See your {niche} data, don't just store it.", "A clear visual layer over {field}.", "Turn {niche} numbers into something you can actually read."],
+    "why": [
+      "{problem} Data nobody can visualize is data nobody can act on in the moment that matters.",
+      "{targetUsers} are staring at raw tables when what they actually need is a chart that answers the question in one glance.",
+      "{niche} generates plenty of numbers. What's missing is a fast, visual way for {targetUsers} to actually read them."
+    ],
+    "solution": [
+      "{name} turns {niche} data into clear, filterable charts and custom views that {targetUsers} can build without writing a query.",
+      "{name} gives {field} data a real visual layer — dashboards and charts that update as the underlying data changes.",
+      "{name} builds live, filterable charts over {niche} data, so {targetUsers} can spot a trend without exporting anything to a spreadsheet."
+    ],
+    "githubDesc": ["Open-source visualization tool for {field} — charts and dashboards, no query language required."]
+  },
+  "management": {
+    "taglines": ["Know who owns every piece of {niche}.", "Ownership and accountability for {field}, made visible.", "No more \"who owns this\" in {niche}."],
+    "why": [
+      "{problem} Work without a clear owner tends to stall right at the moment it matters most.",
+      "{targetUsers} keep asking \"who owns this\" because the answer isn't written down anywhere durable.",
+      "Every piece of {niche} work needs an owner and a status. Right now, both live in someone's memory instead of a system."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} a dashboard of ownership, status, and priority across {niche}, with reports that make accountability visible instead of assumed.",
+      "{name} assigns and tracks ownership across {field} work so nothing sits in limbo waiting for someone to notice.",
+      "{name} makes ownership of {niche} explicit and visible, with a dashboard {targetUsers} can check instead of asking around."
+    ],
+    "githubDesc": ["Open-source ownership and management dashboard for {field} — who owns what, and its current status."]
+  },
+  "tracking": {
+    "taglines": ["Never lose track of {niche} again.", "A reliable history and status for {field}.", "Always know where {niche} actually stands."],
+    "why": [
+      "{problem} Without a record, status becomes whatever the last person remembers — which is rarely accurate.",
+      "{targetUsers} spend real time just trying to reconstruct \"where did this end up\" instead of doing the next step.",
+      "{niche} moves through enough hands that status gets lost between them. A reliable record shouldn't be optional."
+    ],
+    "solution": [
+      "{name} keeps a running timeline and status for every item in {niche}, with notifications so follow-ups never get forgotten.",
+      "{name} gives {targetUsers} a clear, queryable history of {field} activity — what happened, when, and by whom.",
+      "{name} logs every status change in {niche} on a timeline {targetUsers} can query, so nothing has to be reconstructed from memory."
+    ],
+    "githubDesc": ["Open-source tracking tool for {field} — status, timeline, and history in one place."]
+  },
+  "education": {
+    "taglines": ["Structured {niche} learning, without the overhead.", "Make {field} easier to teach and to learn.", "A real path through {niche}, not a pile of links."],
+    "why": [
+      "{problem} A learning curve nobody designed for is still a learning curve — it just costs more time to get through.",
+      "{targetUsers} need a structured path through {niche}, not another wall of scattered links and PDFs.",
+      "Learning {niche} shouldn't depend on finding the right person to explain it. A structured path should exist on its own."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} structured content, progress tracking, and quick checks for understanding, so {niche} becomes a path instead of a pile.",
+      "{name} turns {field} material into a structured curriculum with progress tracking built in from day one.",
+      "{name} organizes {niche} material into a clear sequence with progress tracking, so {targetUsers} always know what's next."
+    ],
+    "githubDesc": ["Open-source learning tool for {field} — structured content and progress tracking."]
+  },
+  "accessibility": {
+    "taglines": ["Make {niche} usable for everyone.", "Accessibility checks for {field}, built in, not bolted on.", "Catch {niche} accessibility gaps before they ship."],
+    "why": [
+      "{problem} Every barrier like this quietly excludes real people, even when it was never anyone's intention.",
+      "{targetUsers} care about getting this right but don't have a fast, reliable way to check it today.",
+      "Accessibility gaps in {niche} are rarely intentional — they're just what happens without a fast, repeatable way to check for them."
+    ],
+    "solution": [
+      "{name} runs automated accessibility audits over {niche}, gives {targetUsers} specific suggestions to fix what it finds, and reports progress against WCAG guidelines.",
+      "{name} checks {field} output against accessibility guidelines continuously, so issues get caught before they ship, not after a complaint.",
+      "{name} audits {niche} against WCAG guidelines automatically and hands {targetUsers} specific, actionable fixes instead of a raw compliance score."
+    ],
+    "githubDesc": ["Open-source accessibility auditor for {field} — automated checks, clear suggestions, WCAG-aligned."]
+  },
+  "integration": {
+    "taglines": ["Connect the {niche} tools that don't talk to each other.", "Sync {field} data without the manual copy-paste.", "Stop retyping the same {niche} data twice."],
+    "why": [
+      "{problem} Every manual sync between tools is a chance for the two systems to quietly disagree with each other.",
+      "{targetUsers} are re-typing the same data into a second system because nothing connects the two automatically.",
+      "{niche} runs across tools that were never built to talk to each other, so {targetUsers} end up being the integration layer by hand."
+    ],
+    "solution": [
+      "{name} connects the tools {targetUsers} already use in {niche} with prebuilt connectors, keeps data in sync, and logs every sync so mismatches are easy to catch.",
+      "{name} maps and syncs data between disconnected {field} systems automatically, with clear error handling when a sync fails.",
+      "{name} bridges the {niche} tools {targetUsers} already rely on, syncing data automatically and logging every failure clearly."
+    ],
+    "githubDesc": ["Open-source integration layer for {field} — connects the tools that don't talk to each other."]
+  },
+  "reliability": {
+    "taglines": ["Make {niche} systems predictable again.", "Fewer surprises for {field}, with health baked in.", "Stop firefighting the same {niche} failure twice."],
+    "why": [
+      "{problem} A system that fails unpredictably erodes trust faster than one that fails loudly and consistently.",
+      "{targetUsers} are firefighting the same class of failure repeatedly because nothing tracks it as a pattern.",
+      "Every unpredictable failure in {niche} costs {targetUsers} trust, not just time — and trust is much slower to rebuild."
+    ],
+    "solution": [
+      "{name} runs continuous health checks across {niche}, keeps an incident log, and retries or fails over automatically when it safely can.",
+      "{name} gives {targetUsers} uptime tracking and an incident history for {field}, turning recurring failures into a pattern that's easy to see and fix.",
+      "{name} keeps a running incident log for {niche} and retries or fails over automatically, so the same failure stops catching {targetUsers} off guard."
+    ],
+    "githubDesc": ["Open-source reliability toolkit for {field} — health checks, incident log, automatic failover."]
+  },
+  "privacy": {
+    "taglines": ["Know exactly where {niche} data lives.", "Privacy-first tooling for {field}.", "An honest inventory of {niche} data, finally."],
+    "why": [
+      "{problem} Sensitive data nobody has inventoried is sensitive data nobody can actually protect.",
+      "{targetUsers} need a clear answer about what personal data exists and who can reach it — most teams can't give one today.",
+      "You can't protect {niche} data you haven't inventoried. Right now, most teams are protecting a guess."
+    ],
+    "solution": [
+      "{name} builds {targetUsers} a live inventory of sensitive {niche} data, enforces access controls, and logs every access for accountability.",
+      "{name} tracks consent and access to personal data across {field}, with redaction tools so sharing doesn't mean over-sharing.",
+      "{name} keeps a live, accurate inventory of {niche} data and who can reach it, with an audit log {targetUsers} can actually stand behind."
+    ],
+    "githubDesc": ["Open-source privacy tool for {field} — data inventory, access control, audit log."]
+  },
+  "developer-experience": {
+    "taglines": ["Remove the friction from the {niche} dev loop.", "Developer tooling {field} teams actually enjoy.", "Less setup pain, more {niche} shipped."],
+    "why": [
+      "{problem} Every bit of friction in the dev loop is a small tax paid every single day by every single developer.",
+      "{targetUsers} lose real momentum to setup pain and boilerplate that a good tool should have handled for them.",
+      "The first ten minutes of touching {niche} shouldn't be fighting the setup. That time belongs to the actual problem."
+    ],
+    "solution": [
+      "{name} gives {targetUsers} a CLI, scaffolding, and docs generated straight from the code, so {niche} projects start fast and stay consistent.",
+      "{name} automates the repetitive parts of the {field} dev workflow — scaffolding, linting, and docs — so developers spend time on the actual problem.",
+      "{name} gives {targetUsers} a CLI that scaffolds {niche} projects and keeps docs generated from the real code, not a stale wiki page."
+    ],
+    "githubDesc": ["Open-source developer tool for {field} — CLI, scaffolding, and docs that stay in sync with the code."]
+  }
+}

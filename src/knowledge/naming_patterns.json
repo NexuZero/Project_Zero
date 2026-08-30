@@ -1,0 +1,29 @@
+{
+  "suffixes": [
+    { "word": "Flow", "fitCategories": ["automation", "productivity", "integration"] },
+    { "word": "Guard", "fitCategories": ["security", "detection", "privacy", "reliability"] },
+    { "word": "Lens", "fitCategories": ["analysis", "visualization", "monitoring"] },
+    { "word": "Watch", "fitCategories": ["monitoring", "reliability", "tracking", "detection"] },
+    { "word": "Forge", "fitCategories": ["automation", "developer-experience", "management"] },
+    { "word": "Pilot", "fitCategories": ["automation", "management", "education"] },
+    { "word": "Kit", "fitCategories": ["developer-experience", "documentation", "education"] },
+    { "word": "Scout", "fitCategories": ["detection", "analysis", "integration"] },
+    { "word": "Hub", "fitCategories": ["collaboration", "management", "communication", "organization"] },
+    { "word": "Track", "fitCategories": ["tracking", "management", "monitoring"] },
+    { "word": "Base", "fitCategories": ["organization", "documentation", "data"] },
+    { "word": "Sync", "fitCategories": ["integration", "collaboration", "communication"] },
+    { "word": "Board", "fitCategories": ["visualization", "management", "productivity"] }
+  ],
+  "prefixModifiers": [
+    { "word": "Auto", "fitCategories": ["automation"] },
+    { "word": "Clear", "fitCategories": ["documentation", "visualization", "communication"] },
+    { "word": "Open", "fitCategories": ["collaboration", "developer-experience"] },
+    { "word": "Quick", "fitCategories": ["productivity", "automation"] },
+    { "word": "Simple", "fitCategories": ["organization", "productivity"] },
+    { "word": "Live", "fitCategories": ["monitoring", "tracking", "reliability"] }
+  ],
+  "brandSuffixes": ["ly", "io", "hq"],
+  "genericActionWords": ["Sync", "Check", "Scan", "Map", "Sense", "Signal", "Ping"],
+  "genericOutcomeWords": ["Clarity", "Insight", "Ready", "Trust", "Order", "Ease"],
+  "maxNameLength": 16
+}

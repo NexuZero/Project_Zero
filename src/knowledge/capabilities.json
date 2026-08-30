@@ -1,0 +1,21 @@
+{
+  "automation": ["Triggers", "Rules", "Actions", "Approval", "Logs", "Scheduling", "Rollback"],
+  "monitoring": ["Dashboard", "Status", "Alerts", "History", "Health Checks", "Metrics"],
+  "detection": ["Scanning", "Classification", "Risk Score", "Alerts", "History", "Reports"],
+  "organization": ["Structured Input", "Tagging", "Search", "Filters", "Bulk Actions", "Views"],
+  "productivity": ["Quick Capture", "Prioritization", "Reminders", "Focus Mode", "Daily Summary"],
+  "security": ["Access Control", "Scanning", "Policy Rules", "Audit Log", "Alerts", "Compliance Reports"],
+  "documentation": ["Templates", "Structured Input", "Export", "History", "Search", "Versioning"],
+  "analysis": ["Data Import", "Transformations", "Insights", "Visualizations", "Export", "Reports"],
+  "communication": ["Notifications", "Templates", "Channels", "History", "Threading"],
+  "collaboration": ["Shared Workspace", "Comments", "Permissions", "Activity Feed", "Notifications"],
+  "visualization": ["Dashboards", "Charts", "Filters", "Export", "Custom Views"],
+  "management": ["Dashboard", "Ownership", "Status", "Assignments", "Priorities", "Reports"],
+  "tracking": ["Status", "History", "Timeline", "Notifications", "Reports"],
+  "education": ["Structured Content", "Progress Tracking", "Checks", "Certificates", "Search"],
+  "accessibility": ["Audits", "Suggestions", "Compliance Checks", "Reports", "Guidelines"],
+  "integration": ["Connectors", "Webhooks", "Sync", "Field Mapping", "Error Handling", "Logs"],
+  "reliability": ["Health Checks", "Alerts", "Uptime Tracking", "Incident Log", "Retries", "Failover"],
+  "privacy": ["Data Inventory", "Access Controls", "Redaction", "Audit Log", "Consent Tracking"],
+  "developer-experience": ["CLI", "Scaffolding", "Docs", "Linting", "Automation Hooks", "Templates"]
+}

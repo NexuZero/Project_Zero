@@ -1,0 +1,67 @@
+{
+  "applied-ai": {
+    "cli": ["Python", "Typer", "SQLite", "Rich"],
+    "webDashboard": ["Python", "FastAPI", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "Transformers.js (optional, local)", "IndexedDB"]
+  },
+  "cybersecurity": {
+    "cli": ["Python", "Click", "YARA/Sigma rules", "SQLite"],
+    "webDashboard": ["Go", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "IndexedDB", "Web Crypto API"]
+  },
+  "devops": {
+    "cli": ["Go", "Cobra", "YAML config"],
+    "webDashboard": ["Go", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "GitHub Actions API", "IndexedDB"]
+  },
+  "it-operations": {
+    "cli": ["Python", "Typer", "SQLite"],
+    "webDashboard": ["Node.js", "Express", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "IndexedDB"]
+  },
+  "education": {
+    "cli": ["Python", "Typer", "SQLite"],
+    "webDashboard": ["Node.js", "Express", "SQLite", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "IndexedDB"]
+  },
+  "healthcare": {
+    "cli": ["Python", "Click", "SQLite"],
+    "webDashboard": ["Python", "FastAPI", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "IndexedDB (encrypted at rest)"]
+  },
+  "productivity": {
+    "cli": ["Rust", "Clap", "SQLite"],
+    "webDashboard": ["Node.js", "Express", "SQLite", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "IndexedDB"]
+  },
+  "data": {
+    "cli": ["Python", "Typer", "DuckDB"],
+    "webDashboard": ["Python", "FastAPI", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "DuckDB-WASM"]
+  },
+  "networking": {
+    "cli": ["Go", "Cobra", "pcap bindings"],
+    "webDashboard": ["Go", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "WebSocket", "IndexedDB"]
+  },
+  "automation": {
+    "cli": ["Python", "Typer", "APScheduler", "SQLite"],
+    "webDashboard": ["Node.js", "Express", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "Web Workers", "IndexedDB"]
+  },
+  "developer-tools": {
+    "cli": ["Rust", "Clap"],
+    "webDashboard": ["Node.js", "Express", "SQLite", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "Vite plugin API"]
+  },
+  "finance": {
+    "cli": ["Python", "Typer", "SQLite"],
+    "webDashboard": ["Node.js", "Express", "PostgreSQL", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "IndexedDB"]
+  },
+  "accessibility": {
+    "cli": ["Node.js", "axe-core", "Commander"],
+    "webDashboard": ["Node.js", "Express", "SQLite", "React", "TypeScript"],
+    "browserOnly": ["TypeScript", "React", "axe-core (browser)", "IndexedDB"]
+  }
+}

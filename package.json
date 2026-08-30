@@ -1,0 +1,63 @@
+{
+  "name": "project-zero",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Offline-first project idea engine. Turn a field, niche, and problem into structured open-source project concepts — no API keys, no cloud AI, no account.",
+  "license": "MIT",
+  "author": "Project Zero contributors",
+  "homepage": "https://github.com/NexuZero/Project_Zero#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NexuZero/Project_Zero.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NexuZero/Project_Zero/issues"
+  },
+  "keywords": [
+    "project-idea-generator",
+    "offline-first",
+    "pwa",
+    "rule-based",
+    "no-ai",
+    "privacy-first",
+    "open-source",
+    "developer-tools",
+    "react",
+    "typescript",
+    "vite",
+    "tailwindcss"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "lint": "eslint .",
+    "verify:engine": "node scripts/verify-engine.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.462.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "esbuild": "^0.21.5",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.15.0",
+    "vite": "^5.4.11",
+    "vite-plugin-pwa": "^0.20.5"
+  }
+}

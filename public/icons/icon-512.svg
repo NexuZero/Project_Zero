@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Project Zero">
+  <rect width="512" height="512" rx="108" fill="#6366F1" />
+  <text x="256" y="256" text-anchor="middle" dominant-baseline="central"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="276" font-weight="700" fill="#FFFFFF">0</text>
+</svg>

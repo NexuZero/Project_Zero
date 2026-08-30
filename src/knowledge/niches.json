@@ -1,0 +1,22 @@
+[
+  { "id": "ai-agent-ops", "label": "AI Agent Operations", "compatibleFields": ["applied-ai", "it-operations"], "compatibleCategories": ["monitoring", "management", "reliability"] },
+  { "id": "small-business-security", "label": "Small Business Security", "compatibleFields": ["cybersecurity", "finance"], "compatibleCategories": ["detection", "security", "organization"] },
+  { "id": "remote-team-culture", "label": "Remote Team Culture", "compatibleFields": ["productivity", "it-operations"], "compatibleCategories": ["communication", "collaboration", "tracking"] },
+  { "id": "open-source-maintenance", "label": "Open Source Maintenance", "compatibleFields": ["developer-tools", "automation"], "compatibleCategories": ["automation", "documentation", "developer-experience"] },
+  { "id": "clinical-documentation", "label": "Clinical Documentation", "compatibleFields": ["healthcare"], "compatibleCategories": ["documentation", "organization", "privacy"] },
+  { "id": "accessibility-compliance", "label": "Accessibility Compliance", "compatibleFields": ["accessibility", "education"], "compatibleCategories": ["accessibility", "analysis", "documentation"] },
+  { "id": "home-lab-networking", "label": "Home Lab Networking", "compatibleFields": ["networking", "devops"], "compatibleCategories": ["monitoring", "visualization", "reliability"] },
+  { "id": "freelance-invoicing", "label": "Freelance Invoicing", "compatibleFields": ["finance", "productivity"], "compatibleCategories": ["organization", "tracking", "automation"] },
+  { "id": "classroom-management", "label": "Classroom Management", "compatibleFields": ["education"], "compatibleCategories": ["organization", "tracking", "communication"] },
+  { "id": "incident-response", "label": "Incident Response", "compatibleFields": ["cybersecurity", "it-operations"], "compatibleCategories": ["detection", "management", "reliability"] },
+  { "id": "data-quality", "label": "Data Quality", "compatibleFields": ["data", "applied-ai"], "compatibleCategories": ["analysis", "monitoring", "organization"] },
+  { "id": "api-integration", "label": "API Integration", "compatibleFields": ["developer-tools", "devops"], "compatibleCategories": ["integration", "automation", "developer-experience"] },
+  { "id": "personal-finance", "label": "Personal Finance", "compatibleFields": ["finance", "productivity"], "compatibleCategories": ["tracking", "analysis", "organization"] },
+  { "id": "devops-reliability", "label": "DevOps Reliability", "compatibleFields": ["devops", "it-operations"], "compatibleCategories": ["reliability", "monitoring", "management"] },
+  { "id": "developer-onboarding", "label": "Developer Onboarding", "compatibleFields": ["developer-tools", "education"], "compatibleCategories": ["documentation", "developer-experience", "organization"] },
+  { "id": "threat-intelligence", "label": "Threat Intelligence", "compatibleFields": ["cybersecurity"], "compatibleCategories": ["detection", "analysis", "security"] },
+  { "id": "patient-scheduling", "label": "Patient Scheduling", "compatibleFields": ["healthcare"], "compatibleCategories": ["organization", "tracking", "communication"] },
+  { "id": "content-accessibility", "label": "Content Accessibility", "compatibleFields": ["accessibility", "education"], "compatibleCategories": ["accessibility", "documentation", "analysis"] },
+  { "id": "nonprofit-operations", "label": "Nonprofit Operations", "compatibleFields": ["finance", "productivity"], "compatibleCategories": ["organization", "management", "tracking"] },
+  { "id": "field-service-management", "label": "Field Service Management", "compatibleFields": ["networking", "it-operations"], "compatibleCategories": ["tracking", "management", "communication"] }
+]
