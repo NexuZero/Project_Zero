@@ -98,6 +98,7 @@ export interface ProblemTypeDef {
 }
 
 export type CapabilitiesMap = Record<string, string[]>;
+export type KitPhrasingMap = Record<string, string[]>;
 
 export interface NamingSuffix {
   word: string;

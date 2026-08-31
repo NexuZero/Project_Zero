@@ -34,7 +34,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "lint": "eslint .",
-    "verify:engine": "node scripts/verify-engine.mjs"
+    "verify:engine": "node scripts/verify-engine.mjs",
+    "verify:kit": "node scripts/verify-kit.mjs"
   },
   "dependencies": {
     "jszip": "^3.10.1",

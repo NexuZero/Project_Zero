@@ -1,0 +1,77 @@
+{
+  "trdCodingStandards": [
+    "Match whatever the primary language above already uses as its ecosystem-standard formatter/linter (e.g. ESLint + Prettier for TypeScript, ruff/black for Python, gofmt for Go) — don't invent a custom convention.",
+    "Don't invent a house style — adopt whatever formatter/linter is already standard for the primary language above (ESLint + Prettier for TypeScript, ruff/black for Python, gofmt for Go) and enforce it in CI from day one.",
+    "Pick the boring, standard formatter/linter for the primary language above (ESLint + Prettier for TypeScript, ruff/black for Python, gofmt for Go) and never argue about style in review again — the tool decides, not the reviewer."
+  ],
+  "trdDependencyPolicy": [
+    "Ask before adding a dependency not already implied by the stack above.",
+    "Treat the stack above as the full dependency list until proven otherwise — adding anything beyond it should be a deliberate decision, not a drive-by install.",
+    "Every dependency beyond what's listed above is a future maintenance cost — worth adding only when it clearly earns its place."
+  ],
+  "securitySecretsNote": [
+    "All keys live in `.env`; `.env` is gitignored; never hardcode or log a secret value.",
+    "Every secret goes in `.env`, `.env` stays out of git, and no key is ever hardcoded or printed to a log — no exceptions.",
+    "Keep secrets in `.env` only — gitignored, never hardcoded, never logged, never pasted into a commit message either."
+  ],
+  "securityInputValidation": [
+    "Validate every user-submitted field client-side for UX; if there's a backend (see Document 2), validate again server-side — client-side validation alone is never a security boundary.",
+    "Client-side validation is a UX nicety, not a security control — validate every user-submitted field again on the server (see Document 2) if this idea has one.",
+    "Assume every input is hostile until validated: client-side checks improve the experience, but only server-side validation (Document 2, if this idea has a backend) actually protects anything."
+  ],
+  "securityDependencyPolicy": [
+    "Prefer actively-maintained packages; run `npm audit` (or your ecosystem's equivalent) before shipping.",
+    "Favor packages with recent commits and an active maintainer over ones that look abandoned — and run `npm audit` (or your ecosystem's equivalent) before every release.",
+    "An unmaintained dependency is a slow-motion security incident — check `npm audit` (or your ecosystem's equivalent) before shipping, and again periodically after."
+  ],
+  "testingDodIntro": [
+    "A feature isn't done when it works once on your machine — it's done when it clears all five of these:",
+    "Use this checklist as the actual gate before calling any feature complete:",
+    "Nothing ships until every box below is checked, not just the ones that are convenient:"
+  ],
+  "uiuxDesignSystemStarter": [
+    "- One accent color, everything else neutral gray — avoid decorating with more than one hue.\n- A consistent spacing scale (e.g. 4px base unit).\n- Dark and light mode from day one if your stack supports it easily.",
+    "- Pick exactly one accent color and let neutral grays do the rest of the work.\n- Commit to a spacing scale early (a 4px base unit is a safe default) so nothing gets eyeballed later.\n- Build dark mode in from the start if your stack makes it easy — retrofitting it later is always more painful.",
+    "- Restraint over decoration: one accent hue, neutral grays everywhere else.\n- A fixed spacing scale (4px base unit works well) beats ad hoc pixel values every time.\n- If dark/light mode is cheap in your stack, ship both from day one instead of bolting it on later."
+  ],
+  "uiuxMobileNotes": [
+    "Stack everything to a single column below ~640px; keep the primary action reachable without scrolling.",
+    "Below roughly 640px, collapse to a single column and make sure the primary action never requires scrolling to reach.",
+    "Design mobile as the default, not an afterthought: single column under ~640px, primary action always in reach."
+  ],
+  "appFlowJourneyTemplate": [
+    "Home → use **{feature}** → see the result → (optional) act on it → back to Home.",
+    "Start at Home, use **{feature}**, see what it produced, optionally act on it, then return to Home — that loop should never take more than a few clicks.",
+    "The whole point of Home is to get someone to **{feature}** as fast as possible — from there: see the result, act if needed, back to Home."
+  ],
+  "appFlowNavMap": [
+    "Every screen should be reachable from a persistent nav, and every screen needs a way back out — no dead ends.",
+    "No dead ends: every screen needs both a way in (from persistent nav) and a way out.",
+    "If a screen isn't reachable from the main nav, or doesn't have an obvious way back, that's a bug — not a later polish item."
+  ],
+  "appFlowEdgeIntro": [
+    "Design for these on purpose, before they show up as bug reports:",
+    "The edge cases that actually get reported in the wild:",
+    "Three paths that are easy to forget until a real user hits them:"
+  ],
+  "agentRulesScopeBullet": [
+    "Only change what the current task requires. Never refactor unrelated code without asking.",
+    "Stay inside the current task's scope — unrelated refactors need a separate conversation, not a drive-by fix.",
+    "Touch only what the task actually requires; if you spot something else worth fixing, mention it instead of fixing it silently."
+  ],
+  "agentRulesAskBeforeBullet": [
+    "Ask before: adding a dependency, changing the data model, deleting files, or renaming anything project-wide.",
+    "Check first before: adding a new dependency, changing the data model, deleting a file, or a project-wide rename.",
+    "These need a yes first, not a heads-up after: new dependencies, data model changes, file deletions, project-wide renames."
+  ],
+  "agentRulesStuckBullet": [
+    "If stuck after two failed attempts on the same problem: stop, explain what was tried, propose 2-3 options.",
+    "Two failed attempts at the same problem is the signal to stop and explain — not to try a third variation of the same approach.",
+    "After two failed tries: pause, summarize what didn't work, and lay out 2-3 real options instead of guessing again."
+  ],
+  "agentRulesReportBullet": [
+    "After every task: report what changed, which files, and how to verify it.",
+    "Every completed task gets a short report: what changed, which files, how to check it worked.",
+    "Don't just say \"done\" — say what changed, where, and how to verify it before moving on."
+  ]
+}

@@ -1,5 +1,9 @@
 import JSZip from "jszip";
-import type { ProjectIdea } from "@/types";
+import { createShuffleBag } from "@/engine/templates";
+import kitPhrasingData from "@/knowledge/kit_phrasing.json";
+import type { KitPhrasingMap, ProjectIdea } from "@/types";
+
+const kitPhrasing = kitPhrasingData as KitPhrasingMap;
 
 function slugify(name: string): string {
   return name
@@ -10,6 +14,26 @@ function slugify(name: string): string {
 
 function bulletList(items: string[]): string {
   return items.map((item) => `- ${item}`).join("\n");
+}
+
+// ---------------------------------------------------------------------------
+// Phrasing variety — reuses the same shuffle-bag mechanism the core engine
+// uses for idea copy (src/engine/templates.ts). Bags live at module scope, not
+// recreated per buildProjectKit() call: a bag instantiated fresh for a single
+// draw gets zero benefit from its own no-repeat guarantee. The real "batch"
+// here is the sequence of kit exports across one page session, same reasoning
+// as why the engine's CopyPicker lives at the per-batch level, not per-idea.
+// ---------------------------------------------------------------------------
+
+const phrasingBags = new Map<string, () => string>();
+
+function pickPhrasing(key: string): string {
+  let bag = phrasingBags.get(key);
+  if (!bag) {
+    bag = createShuffleBag(kitPhrasing[key] ?? [key]);
+    phrasingBags.set(key, bag);
+  }
+  return bag();
 }
 
 // ---------------------------------------------------------------------------
@@ -108,15 +132,31 @@ function suggestionsFor(map: Record<string, string[]>, categoryId: string, fallb
   return map[categoryId] ?? fallback;
 }
 
+function isoDate(iso: string): string {
+  const parsed = new Date(iso);
+  return Number.isNaN(parsed.getTime()) ? iso : parsed.toISOString().slice(0, 10);
+}
+
 // ---------------------------------------------------------------------------
-// Document builders — every one takes only the already-generated ProjectIdea,
-// nothing is invented beyond generic, clearly-labeled starting suggestions.
+// Document builders — every one takes only the already-generated ProjectIdea
+// (plus the shared, mostly-unused ProjectKitOptions), nothing is invented
+// beyond generic, clearly-labeled starting suggestions.
 // ---------------------------------------------------------------------------
 
-function buildReadme(idea: ProjectIdea): string {
+export interface ProjectKitOptions {
+  /** A user-reviewed, on-device-AI-generated elaboration paragraph. Optional — see src/utils/onDeviceAi.ts. */
+  aiElaboration?: string;
+}
+
+function buildReadme(idea: ProjectIdea, opts: ProjectKitOptions): string {
+  const hasAi = Boolean(opts.aiElaboration && opts.aiElaboration.trim().length > 0);
+  const aiIndexLine = hasAi ? "11. [11-AI-ELABORATION.md](11-AI-ELABORATION.md) — an optional, on-device AI elaboration of this idea\n" : "";
+
   return `# ${idea.name} — Planning Kit
 
 > ${idea.tagline}
+
+**Open source potential:** ${idea.openSourcePotential} · **Community value:** ${idea.communityValue}
 
 This is a starter planning kit for **${idea.name}**, generated offline by [Project Zero](https://github.com/NexuZero/Project_Zero) — no account, no cloud AI, nothing fabricated beyond what the idea itself already describes. It mirrors a lightweight version of a real ten-document planning process. Read in order, or jump to what you need:
 
@@ -130,15 +170,17 @@ This is a starter planning kit for **${idea.name}**, generated offline by [Proje
 8. [08-TESTING.md](08-TESTING.md) — acceptance criteria per feature
 9. [09-IMPLEMENTATION.md](09-IMPLEMENTATION.md) — build order, milestone by milestone
 10. [10-AGENT-RULES.md](10-AGENT-RULES.md) — standing rules if an AI coding agent builds this with you
-
+${aiIndexLine}
 Docs 3, 5, and 6 are honest starting *suggestions* — the engine that generated this idea doesn't know your exact screens, database, or API, so those three are templated guidance to adapt, not fabricated specifics. Everything else is built directly from what was actually generated for this idea.
 
 ---
+Idea generated: ${isoDate(idea.createdAt)} · Kit exported: ${isoDate(new Date().toISOString())}
+
 _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildPrd(idea: ProjectIdea): string {
+function buildPrd(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   const featureList = idea.mvpFeatures.map((f) => `**${f}**`).join(", ");
 
   return `# Document 1 — Product Requirements (${idea.name})
@@ -148,6 +190,8 @@ function buildPrd(idea: ProjectIdea): string {
 
 ${idea.githubDescription}
 
+_Why this name: ${idea.namingRationale}_
+
 ## Problem statement
 ${idea.whyItShouldExist}
 
@@ -156,6 +200,19 @@ ${idea.targetUsers} — the primary user of ${idea.name}, in the ${idea.fieldNam
 
 ## Goal
 ${idea.solution}
+
+## Idea Scorecard (heuristic engine signals, 0-100)
+Project Zero's own internal scoring signals — a different, finer-grained scale from the difficulty rating below (1-5) and the Low/Medium/High labels elsewhere in this kit. Useful as a gut-check, not a guarantee.
+
+| Signal | Score |
+|---|---|
+| Usefulness | ${idea.scores.usefulness} |
+| Originality | ${idea.scores.originality} |
+| Buildability | ${idea.scores.buildability} |
+| Community value | ${idea.scores.communityValue} |
+| Open source suitability | ${idea.scores.openSourceSuitability} |
+| Scope fit | ${idea.scores.scope} |
+| Difficulty (finer-grained) | ${idea.scores.difficulty} |
 
 ## Core features (MVP) — as a user story
 As **${idea.targetUsers}**, I want ${featureList}, so that the problem described above is no longer something to deal with by hand.
@@ -177,7 +234,7 @@ _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildTrd(idea: ProjectIdea): string {
+function buildTrd(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   const stackLines = idea.techStack.map((item) => `- **${item}** — ${stackRole(item)}`).join("\n");
   const backend = hasBackend(idea.techStack);
 
@@ -199,17 +256,17 @@ ${backend ? "  api/            server-side logic, routes, data access\n  web/   
 \`\`\`
 
 ## Coding standards
-Match whatever the primary language above already uses as its ecosystem-standard formatter/linter (e.g. ESLint + Prettier for TypeScript, ruff/black for Python, gofmt for Go) — don't invent a custom convention.
+${pickPhrasing("trdCodingStandards")}
 
 ## Dependency policy
-Ask before adding a dependency not already implied by the stack above.
+${pickPhrasing("trdDependencyPolicy")}
 
 ---
 _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildUiux(idea: ProjectIdea): string {
+function buildUiux(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   const screens = suggestionsFor(SCREEN_SUGGESTIONS, idea.categoryId, ["Home", "Detail view", "Settings"]);
   const screenBlocks = screens
     .map(
@@ -224,31 +281,32 @@ function buildUiux(idea: ProjectIdea): string {
 **This document is an honest starting checklist, not a bespoke design spec** — Project Zero's engine doesn't know your exact screens or brand, so treat everything below as a scaffold to adapt.
 
 ## Design system starter
-- One accent color, everything else neutral gray — avoid decorating with more than one hue.
-- A consistent spacing scale (e.g. 4px base unit).
-- Dark and light mode from day one if your stack supports it easily.
+${pickPhrasing("uiuxDesignSystemStarter")}
 
 ## Suggested screen inventory (starting point, based on this idea's category — ${idea.categoryName})
 ${screenBlocks}
 ## Mobile notes
-Stack everything to a single column below ~640px; keep the primary action reachable without scrolling.
+${pickPhrasing("uiuxMobileNotes")}
 
 ---
 _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildAppFlow(idea: ProjectIdea): string {
+function buildAppFlow(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   const anchorFeature = idea.mvpFeatures[0] ?? "the core feature";
+  const journeyLine = pickPhrasing("appFlowJourneyTemplate").replaceAll("{feature}", anchorFeature);
+
   return `# Document 4 — App Flow (${idea.name})
 
 ## Primary journey
-Home → use **${anchorFeature}** → see the result → (optional) act on it → back to Home.
+${journeyLine}
 
 ## Navigation map
-Every screen should be reachable from a persistent nav, and every screen needs a way back out — no dead ends.
+${pickPhrasing("appFlowNavMap")}
 
 ## Edge paths to design for
+${pickPhrasing("appFlowEdgeIntro")}
 - Back button after a completed action
 - Page refresh mid-flow (does in-progress state survive, or is that acceptable to lose?)
 - A direct link into an inner screen when nothing has loaded yet
@@ -258,16 +316,19 @@ _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildSchema(idea: ProjectIdea): string {
+function buildSchema(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   const entities = suggestionsFor(ENTITY_SUGGESTIONS, idea.categoryId, ["Item", "Owner", "History"]);
   const clientOnly = idea.techStack.some((t) => t.toLowerCase().includes("indexeddb")) && !hasBackend(idea.techStack);
+  const worksheet = entities.map((e) => `| ${e} | _(fill in — see 01-PRD.md)_ |`).join("\n");
 
   return `# Document 5 — Data Model Starting Sketch (${idea.name})
 
 **This is a suggested sketch, not a definitive schema** — adapt freely once real requirements are clearer.
 
 ## Suggested entities (based on this idea's category — ${idea.categoryName})
-${bulletList(entities)}
+| Suggested entity | Touched by which MVP feature(s)? |
+|---|---|
+${worksheet}
 
 ## ID strategy
 UUIDs, generated client-side (\`crypto.randomUUID()\`) unless your stack gives you a better default.
@@ -280,7 +341,7 @@ _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildApiContract(idea: ProjectIdea): string {
+function buildApiContract(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   const backend = hasBackend(idea.techStack);
   if (!backend) {
     return `# Document 6 — API Contract (${idea.name})
@@ -306,6 +367,8 @@ _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 | GET | /api/${resource}/:id | Fetch one |
 | PATCH | /api/${resource}/:id | Update one |
 
+*This primary resource (${resource}) is a guess based on this idea's category, not its specific MVP features — check it against the feature list in 01-PRD.md before committing to it.*
+
 ## Conventions
 JSON in, JSON out. Auth (if any) via a bearer token header. Version the API only once you have an external consumer depending on it — don't pre-optimize.
 
@@ -314,26 +377,26 @@ _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildSecurity(idea: ProjectIdea): string {
+function buildSecurity(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   return `# Document 7 — Security & Environment (${idea.name})
 
 ## Secrets
-All keys live in \`.env\`; \`.env\` is gitignored; never hardcode or log a secret value.
+${pickPhrasing("securitySecretsNote")}
 
 ${idea.aiRequired === "No" ? "This idea has no AI/LLM dependency — there's no AI API key to manage at all." : "If you integrate an AI API, its key goes in `.env` like any other secret, and the app should degrade gracefully (or refuse to run the AI-dependent feature) if that key is missing — never silently fail elsewhere."}
 
 ## Input validation
-Validate every user-submitted field client-side for UX; if there's a backend (see Document 2), validate again server-side — client-side validation alone is never a security boundary.
+${pickPhrasing("securityInputValidation")}
 
 ## Dependency policy
-Prefer actively-maintained packages; run \`npm audit\` (or your ecosystem's equivalent) before shipping.
+${pickPhrasing("securityDependencyPolicy")}
 
 ---
 _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildTesting(idea: ProjectIdea): string {
+function buildTesting(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   const criteria = idea.mvpFeatures
     .map((f) => `- **${f}** — Given a user opens ${idea.name}, when they use ${f.toLowerCase()}, then it behaves as described in this kit's Solution section (see 01-PRD.md).`)
     .join("\n");
@@ -344,6 +407,7 @@ function buildTesting(idea: ProjectIdea): string {
 ${criteria}
 
 ## Definition of done (every feature)
+${pickPhrasing("testingDodIntro")}
 - [ ] Matches its acceptance criterion above
 - [ ] Empty / loading / error states handled
 - [ ] Verified on a mobile viewport
@@ -355,7 +419,7 @@ _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildImplementation(idea: ProjectIdea): string {
+function buildImplementation(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   return `# Document 9 — Implementation Plan (${idea.name})
 
 ## Milestones, in order
@@ -377,23 +441,35 @@ _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-function buildAgentRules(idea: ProjectIdea): string {
+function buildAgentRules(idea: ProjectIdea, _opts: ProjectKitOptions): string {
   return `# Document 10 — Agent Collaboration Rules (${idea.name})
 
 If you build this with an AI coding agent, give it this file (or fold it into your own \`CLAUDE.md\`):
 
-- Only change what the current task requires. Never refactor unrelated code without asking.
-- Ask before: adding a dependency, changing the data model, deleting files, or renaming anything project-wide.
+- ${pickPhrasing("agentRulesScopeBullet")}
+- ${pickPhrasing("agentRulesAskBeforeBullet")}
 ${idea.aiRequired === "No" ? "- **Never add a call to a paid or cloud LLM/AI API** — this idea is explicitly scoped to need none." : ""}
-- If stuck after two failed attempts on the same problem: stop, explain what was tried, propose 2-3 options.
-- After every task: report what changed, which files, and how to verify it.
+- ${pickPhrasing("agentRulesStuckBullet")}
+- ${pickPhrasing("agentRulesReportBullet")}
 
 ---
 _Generated offline by Project Zero — no account, no cloud AI, no tracking._
 `;
 }
 
-const DOCUMENT_BUILDERS: { filename: string; build: (idea: ProjectIdea) => string }[] = [
+function buildAiElaboration(idea: ProjectIdea, text: string): string {
+  return `# Document 11 — AI-Elaborated Summary (${idea.name})
+
+**Optional, on-device only.** This paragraph was written by your browser's built-in local AI model, at your request, to rephrase and connect what Project Zero's rule engine already generated elsewhere in this kit — nothing was sent to any server, and nothing new was invented beyond what's already in this kit. Review it like a first draft; small on-device models can still get details wrong. This is separate from whether *${idea.name} itself* needs AI to build (see Document 1 / Document 7) — it's Project Zero's own optional writing assist for this kit.
+
+${text.trim()}
+
+---
+_Generated offline by Project Zero — no account, no cloud AI, no tracking._
+`;
+}
+
+const DOCUMENT_BUILDERS: { filename: string; build: (idea: ProjectIdea, opts: ProjectKitOptions) => string }[] = [
   { filename: "00-README.md", build: buildReadme },
   { filename: "01-PRD.md", build: buildPrd },
   { filename: "02-TRD.md", build: buildTrd },
@@ -407,23 +483,26 @@ const DOCUMENT_BUILDERS: { filename: string; build: (idea: ProjectIdea) => strin
   { filename: "10-AGENT-RULES.md", build: buildAgentRules }
 ];
 
-/** Builds the full 11-file planning kit as a map of {filename: content}. Exported for testing. */
-export function buildProjectKit(idea: ProjectIdea): Record<string, string> {
+/** Builds the full planning kit as a map of {filename: content} — 11 files, or 12 with an AI elaboration. Exported for testing. */
+export function buildProjectKit(idea: ProjectIdea, opts: ProjectKitOptions = {}): Record<string, string> {
   const files: Record<string, string> = {};
   for (const { filename, build } of DOCUMENT_BUILDERS) {
-    files[filename] = build(idea);
+    files[filename] = build(idea, opts);
+  }
+  if (opts.aiElaboration && opts.aiElaboration.trim().length > 0) {
+    files["11-AI-ELABORATION.md"] = buildAiElaboration(idea, opts.aiElaboration);
   }
   return files;
 }
 
 /** Triggers a browser download of the full planning kit as a .zip (one folder, per-idea). */
-export async function downloadProjectKit(idea: ProjectIdea): Promise<void> {
+export async function downloadProjectKit(idea: ProjectIdea, opts: ProjectKitOptions = {}): Promise<void> {
   const zip = new JSZip();
   const folderName = slugify(idea.name);
   const folder = zip.folder(folderName);
   if (!folder) throw new Error("Failed to create zip folder");
 
-  const files = buildProjectKit(idea);
+  const files = buildProjectKit(idea, opts);
   for (const [filename, content] of Object.entries(files)) {
     folder.file(filename, content);
   }

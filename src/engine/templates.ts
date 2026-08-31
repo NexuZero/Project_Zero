@@ -117,7 +117,7 @@ export interface GeneratedCopy {
  * of 10 lands on the same category multiple times, the copy doesn't repeat
  * word-for-word just because a category only has 2-3 template variants.
  */
-function createShuffleBag<T>(items: T[]): () => T {
+export function createShuffleBag<T>(items: T[]): () => T {
   let bag: T[] = [];
   let last: T | undefined;
 
