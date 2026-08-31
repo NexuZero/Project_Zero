@@ -20,8 +20,14 @@ const CLI_LEANING = new Set(["automation", "developer-experience", "documentatio
 /** Categories that lean toward a full web dashboard. */
 const DASHBOARD_LEANING = new Set(["monitoring", "management", "visualization", "analysis", "detection", "reliability"]);
 
-function pick<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
+/** Picks `count` distinct items without replacement (caps at `arr.length`). */
+function pickMany<T>(arr: T[], count: number): T[] {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, Math.min(count, arr.length));
 }
 
 export function pickTechStackVariant(categoryId: string): TechStackVariant {
@@ -68,9 +74,10 @@ export function buildFeatures(categoryId: string): FeatureSet {
   const mvpCount = Math.max(2, Math.ceil(list.length / 2));
   const coreFeatures = [...list];
   const mvpFeatures = list.slice(0, mvpCount);
-  const leftover = list.slice(mvpCount);
-  const extra = pick(FUTURE_EXTRAS);
-  const futureFeatures = [...leftover, extra];
+  // Future features are genuinely additional ideas beyond the core vision (never a
+  // re-listing of items already in coreFeatures) — otherwise a feature can end up
+  // labeled both "core" and "deferred" in the same document, which is a contradiction.
+  const futureFeatures = pickMany(FUTURE_EXTRAS, 2);
   return { coreFeatures, mvpFeatures, futureFeatures };
 }
 

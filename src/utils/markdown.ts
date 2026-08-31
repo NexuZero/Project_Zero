@@ -90,7 +90,11 @@ function slugify(name: string): string {
 /** Triggers a browser download of the idea as a `.md` file. DOM concern, kept out of `toMarkdown`. */
 export function downloadMarkdown(idea: ProjectIdea): void {
   const content = toMarkdown(idea);
-  const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
+  // A leading BOM makes editors/viewers that don't sniff encoding (older Notepad, some
+  // spreadsheet/CSV-style importers) detect UTF-8 correctly instead of falling back to a
+  // system codepage and mangling the em dash / difficulty-dot characters below into mojibake.
+  const BOM = String.fromCharCode(0xfeff);
+  const blob = new Blob([BOM, content], { type: "text/markdown;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
   anchor.href = url;
