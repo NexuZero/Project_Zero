@@ -22,6 +22,7 @@ export interface ProjectScores {
 export interface ProjectIdea {
   id: string;
   name: string;
+  namingRationale: string;
   tagline: string;
   fieldId: string;
   fieldName: string;
@@ -101,17 +102,24 @@ export type CapabilitiesMap = Record<string, string[]>;
 export interface NamingSuffix {
   word: string;
   fitCategories: string[];
+  meaning: string;
 }
 
 export interface NamingPrefix {
   word: string;
   fitCategories: string[];
+  meaning: string;
+}
+
+export interface NamingBrandSuffix {
+  word: string;
+  meaning: string;
 }
 
 export interface NamingPatterns {
   suffixes: NamingSuffix[];
   prefixModifiers: NamingPrefix[];
-  brandSuffixes: string[];
+  brandSuffixes: NamingBrandSuffix[];
   genericActionWords: string[];
   genericOutcomeWords: string[];
   maxNameLength: number;

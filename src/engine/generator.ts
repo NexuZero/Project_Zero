@@ -135,7 +135,10 @@ function buildIdea(params: BuildIdeaParams): ProjectIdea {
   const difficulty = computeDifficulty(buildSize, techStackVariant);
   const aiRequired = computeAiRequired(field.id, categoryId);
 
-  const name = generateName({ fieldId: field.id, categoryId }, usedNames);
+  const { name, rationale: namingRationale } = generateName(
+    { fieldId: field.id, categoryId, categoryName: categoryDef?.name ?? categoryId },
+    usedNames
+  );
   usedNames.push(name);
 
   const copy = copyPicker.buildCopy(categoryId, {
@@ -160,6 +163,7 @@ function buildIdea(params: BuildIdeaParams): ProjectIdea {
   return {
     id: crypto.randomUUID(),
     name,
+    namingRationale,
     tagline: copy.tagline,
     fieldId: field.id,
     fieldName: field.name,

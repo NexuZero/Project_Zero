@@ -1,28 +1,32 @@
 {
   "suffixes": [
-    { "word": "Flow", "fitCategories": ["automation", "productivity", "integration"] },
-    { "word": "Guard", "fitCategories": ["security", "detection", "privacy", "reliability"] },
-    { "word": "Lens", "fitCategories": ["analysis", "visualization", "monitoring"] },
-    { "word": "Watch", "fitCategories": ["monitoring", "reliability", "tracking", "detection"] },
-    { "word": "Forge", "fitCategories": ["automation", "developer-experience", "management"] },
-    { "word": "Pilot", "fitCategories": ["automation", "management", "education"] },
-    { "word": "Kit", "fitCategories": ["developer-experience", "documentation", "education"] },
-    { "word": "Scout", "fitCategories": ["detection", "analysis", "integration"] },
-    { "word": "Hub", "fitCategories": ["collaboration", "management", "communication", "organization"] },
-    { "word": "Track", "fitCategories": ["tracking", "management", "monitoring"] },
-    { "word": "Base", "fitCategories": ["organization", "documentation", "data"] },
-    { "word": "Sync", "fitCategories": ["integration", "collaboration", "communication"] },
-    { "word": "Board", "fitCategories": ["visualization", "management", "productivity"] }
+    { "word": "Flow", "fitCategories": ["automation", "productivity", "integration"], "meaning": "smooth, continuous movement with no manual steps in the way" },
+    { "word": "Guard", "fitCategories": ["security", "detection", "privacy", "reliability"], "meaning": "protection and defense against something going wrong" },
+    { "word": "Lens", "fitCategories": ["analysis", "visualization", "monitoring"], "meaning": "a focused, clarifying way of looking at something" },
+    { "word": "Watch", "fitCategories": ["monitoring", "reliability", "tracking", "detection"], "meaning": "ongoing, continuous observation over time" },
+    { "word": "Forge", "fitCategories": ["automation", "developer-experience", "management"], "meaning": "actively building or shaping something new" },
+    { "word": "Pilot", "fitCategories": ["automation", "management", "education"], "meaning": "steering or guiding something toward a goal" },
+    { "word": "Kit", "fitCategories": ["developer-experience", "documentation", "education"], "meaning": "a ready-to-use bundle of tools" },
+    { "word": "Scout", "fitCategories": ["detection", "analysis", "integration"], "meaning": "finding things early, before they become a problem" },
+    { "word": "Hub", "fitCategories": ["collaboration", "management", "communication", "organization"], "meaning": "one central place everything connects through" },
+    { "word": "Track", "fitCategories": ["tracking", "management", "monitoring"], "meaning": "following progress over time so nothing gets lost" },
+    { "word": "Base", "fitCategories": ["organization", "documentation", "data"], "meaning": "a solid, organized home for information" },
+    { "word": "Sync", "fitCategories": ["integration", "collaboration", "communication"], "meaning": "keeping separate things aligned and up to date" },
+    { "word": "Board", "fitCategories": ["visualization", "management", "productivity"], "meaning": "a shared view where everything is visible at once" }
   ],
   "prefixModifiers": [
-    { "word": "Auto", "fitCategories": ["automation"] },
-    { "word": "Clear", "fitCategories": ["documentation", "visualization", "communication"] },
-    { "word": "Open", "fitCategories": ["collaboration", "developer-experience"] },
-    { "word": "Quick", "fitCategories": ["productivity", "automation"] },
-    { "word": "Simple", "fitCategories": ["organization", "productivity"] },
-    { "word": "Live", "fitCategories": ["monitoring", "tracking", "reliability"] }
+    { "word": "Auto", "fitCategories": ["automation"], "meaning": "it happens by itself, without a manual step" },
+    { "word": "Clear", "fitCategories": ["documentation", "visualization", "communication"], "meaning": "easy to understand at a glance, no confusion" },
+    { "word": "Open", "fitCategories": ["collaboration", "developer-experience"], "meaning": "accessible to everyone, not locked behind gatekeeping" },
+    { "word": "Quick", "fitCategories": ["productivity", "automation"], "meaning": "fast, with very little effort required" },
+    { "word": "Simple", "fitCategories": ["organization", "productivity"], "meaning": "stripped down to just what's needed" },
+    { "word": "Live", "fitCategories": ["monitoring", "tracking", "reliability"], "meaning": "shows what's happening right now, not stale data" }
   ],
-  "brandSuffixes": ["ly", "io", "hq"],
+  "brandSuffixes": [
+    { "word": "ly", "meaning": "a soft, modern startup-style ending common on lightweight tools" },
+    { "word": "io", "meaning": "a developer/tech-tool convention borrowed from the .io domain" },
+    { "word": "hq", "meaning": "short for headquarters — the one central place this happens" }
+  ],
   "genericActionWords": ["Sync", "Check", "Scan", "Map", "Sense", "Signal", "Ping"],
   "genericOutcomeWords": ["Clarity", "Insight", "Ready", "Trust", "Order", "Ease"],
   "maxNameLength": 16

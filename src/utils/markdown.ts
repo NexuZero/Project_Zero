@@ -1,16 +1,43 @@
-import type { ProjectIdea } from "@/types";
+import type { AiRequired, ProjectIdea } from "@/types";
+
+const FALLBACK_RATIONALE =
+  "This name was generated in an earlier version of Project Zero, so a detailed rationale isn't available for it.";
 
 function bulletList(items: string[]): string {
   return items.map((item) => `- ${item}`).join("\n");
 }
 
-/** Renders a ProjectIdea as Markdown shaped like the start of a GitHub README (spec §11). */
+function aiRequiredNote(aiRequired: AiRequired): string {
+  switch (aiRequired) {
+    case "Yes":
+      return "AI is a required part of this build, not an optional add-on.";
+    case "No":
+      return "No AI is required — this is a fully deterministic, rule-based build.";
+    case "Optional":
+      return "AI can enhance this build, but a working version doesn't require it.";
+  }
+}
+
+/** Renders a ProjectIdea as a complete Markdown project brief (spec §11 — README-shaped, expanded). */
 export function toMarkdown(idea: ProjectIdea): string {
   return `# ${idea.name}
 
 > ${idea.tagline}
 
 ${idea.githubDescription}
+
+## Naming Rationale
+
+${idea.namingRationale || FALLBACK_RATIONALE}
+
+## Snapshot
+
+| | |
+|---|---|
+| Field | ${idea.fieldName} |
+| Niche | ${idea.nicheLabel} |
+| Category | ${idea.categoryName} |
+| Target users | ${idea.targetUsers} |
 
 ## Problem
 
@@ -20,36 +47,31 @@ ${idea.whyItShouldExist}
 
 ${idea.solution}
 
-## Features
+## Scope
 
-### Core
-${bulletList(idea.coreFeatures)}
-
-### MVP
+### MVP / v1
 ${bulletList(idea.mvpFeatures)}
 
-### Future
+### Core concept
+${bulletList(idea.coreFeatures)}
+
+### Deferred / future
 ${bulletList(idea.futureFeatures)}
 
 ## Tech Stack
 
 ${bulletList(idea.techStack)}
 
-## Roadmap
+## Effort & Difficulty
 
-1. Ship the MVP feature set above.
-2. Gather feedback from ${idea.targetUsers.toLowerCase()}.
-3. Layer in the future features once the core loop is proven.
+${"●".repeat(idea.difficulty)}${"○".repeat(5 - idea.difficulty)} — difficulty ${idea.difficulty}/5, estimated as a **${idea.buildSize}** build.
 
-## Details
+${aiRequiredNote(idea.aiRequired)}
+
+## Open Source & Community Potential
 
 | | |
 |---|---|
-| Field | ${idea.fieldName} |
-| Niche | ${idea.nicheLabel} |
-| Difficulty | ${"●".repeat(idea.difficulty)}${"○".repeat(5 - idea.difficulty)} |
-| Build size | ${idea.buildSize} |
-| AI required | ${idea.aiRequired} |
 | Open source potential | ${idea.openSourcePotential} |
 | Community value | ${idea.communityValue} |
 

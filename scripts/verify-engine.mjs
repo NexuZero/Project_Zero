@@ -48,6 +48,14 @@ assert(new Set(batch1.map((i) => i.name)).size === 10, "all 10 names in a batch 
 assert(batch1.every((i) => i.coreFeatures.length > 0 && i.mvpFeatures.length > 0), "every idea has core + MVP features");
 assert(batch1.every((i) => i.techStack.length > 0), "every idea has a tech stack");
 assert(batch1.every((i) => i.whyItShouldExist.length > 20 && i.solution.length > 20), "every idea has real why/solution copy");
+assert(
+  batch1.every((i) => typeof i.namingRationale === "string" && i.namingRationale.trim().length >= 25),
+  "every idea has a substantive naming rationale"
+);
+assert(
+  new Set(batch1.map((i) => i.namingRationale)).size >= Math.ceil(batch1.length * 0.8),
+  "naming rationales are meaningfully varied across a batch, not a single boilerplate string repeated verbatim"
+);
 
 // 2. Generate 10 More — no repeats against excludeNames
 const seenNames = batch1.map((i) => i.name);

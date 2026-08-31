@@ -12,6 +12,9 @@ import { useToast } from "@/components/Toast";
 import { findIdeaById } from "@/utils/storage";
 import { downloadMarkdown } from "@/utils/markdown";
 
+const FALLBACK_RATIONALE =
+  "This name was generated in an earlier version of Project Zero, so a detailed rationale isn't available for it.";
+
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="border-t border-border dark:border-border-dark py-6 first:border-t-0 first:pt-0">
@@ -125,6 +128,12 @@ export function ProjectDetail() {
         </div>
 
         <div className="mt-8">
+          <Section title="Naming Rationale">
+            <p className="text-sm leading-relaxed text-ink/90 dark:text-ink-dark/90">
+              {idea.namingRationale || FALLBACK_RATIONALE}
+            </p>
+          </Section>
+
           <Section title="Niche">
             <p className="text-sm text-ink dark:text-ink-dark">{idea.nicheLabel}</p>
           </Section>
