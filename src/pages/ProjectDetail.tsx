@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Download, Heart, PackageSearch, Sparkles } from "lucide-react";
+import { ArrowLeft, Download, FolderArchive, Heart, PackageSearch, Sparkles } from "lucide-react";
 import { Card } from "@/components/Card";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
@@ -11,6 +11,7 @@ import { useIdeaSession } from "@/hooks/useIdeaSession";
 import { useToast } from "@/components/Toast";
 import { findIdeaById } from "@/utils/storage";
 import { downloadMarkdown } from "@/utils/markdown";
+import { downloadProjectKit } from "@/utils/projectKit";
 
 const FALLBACK_RATIONALE =
   "This name was generated in an earlier version of Project Zero, so a detailed rationale isn't available for it.";
@@ -45,6 +46,7 @@ export function ProjectDetail() {
   const { isFavorite, toggleFavorite } = useFavorites();
   const { generateSimilar } = useIdeaSession();
   const { showToast } = useToast();
+  const [isExportingKit, setIsExportingKit] = useState(false);
 
   const idea = useMemo(() => (id ? findIdeaById(id) : undefined), [id]);
 
@@ -70,6 +72,16 @@ export function ProjectDetail() {
   function handleExport() {
     downloadMarkdown(idea!);
     showToast("Exported as Markdown");
+  }
+
+  async function handleExportKit() {
+    setIsExportingKit(true);
+    try {
+      await downloadProjectKit(idea!);
+      showToast("Planning kit downloaded");
+    } finally {
+      setIsExportingKit(false);
+    }
   }
 
   function handleSimilar() {
@@ -124,6 +136,10 @@ export function ProjectDetail() {
           <Button variant="secondary" onClick={handleExport}>
             <Download size={16} />
             Export Markdown
+          </Button>
+          <Button variant="secondary" onClick={handleExportKit} disabled={isExportingKit}>
+            <FolderArchive size={16} />
+            {isExportingKit ? "Preparing kit…" : "Export Planning Kit"}
           </Button>
         </div>
 

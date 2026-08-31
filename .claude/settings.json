@@ -11,7 +11,28 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(git-filter-repo --version)",
+      "Bash(gh repo *)",
+      "Bash(cp -r /home/zik/Documents/GitHub/Project_Zero/.project-os ~/project-os-backup-2026-09-01)",
+      "Read(//home/zik/**)",
+      "Bash(git clone *)",
+      "Bash(git-filter-repo --path .project-os --invert-paths)",
+      "Bash(git log *)",
+      "Bash(git ls-tree *)",
+      "Bash(git remote *)",
+      "Bash(node .tmp-encoding-check.mjs)",
+      "Bash(npm view *)",
+      "Bash(npm install *)",
+      "Bash(node -e \"console.log\\(require.resolve\\('jszip/package.json'\\)\\)\")",
+      "Bash(node -e \"const icons = require\\('lucide-react'\\); console.log\\('FolderArchive' in icons\\);\")",
+      "Bash(node .tmp-kit-check.mjs)",
+      "Bash(rm -rf kit-extracted)",
+      "Bash(mkdir kit-extracted *)",
+      "Bash(unzip -q kit.zip -d kit-extracted)",
+      "Bash(rm -rf kit-extracted2)",
+      "Bash(mkdir kit-extracted2 *)",
+      "Bash(unzip -q kit.zip -d kit-extracted2)"
     ]
   }
 }
