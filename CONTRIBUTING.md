@@ -35,7 +35,7 @@ Requires Node.js 20+. No `.env` file, no API key, no external account is needed 
 
 ## The one hard rule
 
-**Never add a call to any paid or cloud LLM/AI API** (OpenAI, Anthropic, Gemini, or otherwise) anywhere in `src/engine/` or the generation path. Project Zero's entire premise is that it works fully offline, for free, forever. A PR that introduces a network dependency to the core generation flow will be declined regardless of how good the output looks — see `.project-os/planning/07-SECURITY.md` for the full reasoning. (Architecture for an *optional*, fully local model — Ollama, WebLLM, Transformers.js — is welcome as a genuinely optional enhancement layered on top of, not replacing, the rule engine.)
+**Never add a call to any paid or cloud LLM/AI API** (OpenAI, Anthropic, Gemini, or otherwise) anywhere in `src/engine/` or the generation path. Project Zero's entire premise is that it works fully offline, for free, forever. A PR that introduces a network dependency to the core generation flow will be declined regardless of how good the output looks — see `SECURITY.md` for the full reasoning. (Architecture for an *optional*, fully local model — Ollama, WebLLM, Transformers.js — is welcome as a genuinely optional enhancement layered on top of, not replacing, the rule engine.)
 
 ## Code contributions
 

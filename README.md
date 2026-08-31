@@ -59,7 +59,7 @@ Open the printed local URL, fill in a field/niche/problem (or click **Surprise M
 
 ## Tech stack
 
-React 18 + TypeScript + Vite + Tailwind CSS + react-router-dom + lucide-react, `vite-plugin-pwa` for the service worker/manifest. No backend. Favorites and preferences persist in `localStorage`; the current results batch and session dedupe list live in `sessionStorage`. Full rationale in [`.project-os/planning/`](.project-os/planning/).
+React 18 + TypeScript + Vite + Tailwind CSS + react-router-dom + lucide-react, `vite-plugin-pwa` for the service worker/manifest. No backend. Favorites and preferences persist in `localStorage`; the current results batch and session dedupe list live in `sessionStorage`.
 
 ## Project structure
 
@@ -94,7 +94,7 @@ Documented rather than hidden, per this project's own build-quality bar:
 
 ## Roadmap
 
-See [`CHANGELOG.md`](CHANGELOG.md) for what shipped, and [`.project-os/planning/09-IMPLEMENTATION.md`](.project-os/planning/09-IMPLEMENTATION.md) for the build plan this was built from.
+See [`CHANGELOG.md`](CHANGELOG.md) for what shipped.
 
 ## Contributing
 
