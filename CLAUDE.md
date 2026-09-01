@@ -3,9 +3,11 @@
 Project Zero is an offline-first, rule-based "Project Idea Engine." Full spec: `Project_Zero.md`. Planning docs (PRD, TRD, UI/UX, App Flow, Schema, API Contract, Security, Testing, Implementation Plan) and live task/decision/issue tracking live locally in `.project-os/`, if present on this machine — it's gitignored and never published, so don't assume it exists in a fresh clone. When it exists, read `.project-os/PROJECT_STATE.md`'s Delta block first on resume.
 
 ## Non-negotiable
-- **No paid or cloud LLM/AI API** (OpenAI, Anthropic, Gemini, or any other) anywhere in the generation path, ever. The rule engine in `src/engine/` must always work fully offline. This overrides convenience every time.
+- **Banned, permanently:** any paid or cloud LLM/AI API (OpenAI, Anthropic, Gemini, or any other hosted endpoint) anywhere in the generation path, ever. This overrides convenience every time.
+- **Permitted, opt-in, default off:** inference that executes entirely on the user's own device (in-browser WebLLM, Chrome's built-in on-device model, a locally-run Ollama instance) — never required, never silently enabled, and never a substitute for the rule engine.
+- **Unchanged:** the deterministic rule engine in `src/engine/` must always produce a complete, correct result with no model present at all — on-device inference is additive polish, not a dependency.
 - No backend, no accounts, no analytics/trackers in V1.
-- User data (ideas, favorites) never leaves the device — no network calls beyond loading the app's own static assets.
+- User data (ideas, favorites) never leaves the device — no network calls beyond loading the app's own static assets and, if the user opts in, a one-time on-device model-weights download (model files only, never user data; cached thereafter — see `SECURITY.md`).
 
 ## Working rules
 - Only change what the current task requires. Never refactor unrelated code without asking.

@@ -22,4 +22,7 @@ jobs:
       - run: npm run lint
       - run: npm run verify:engine
       - run: npm run verify:kit
+      - run: npm run verify:on-device-ai
+      - run: npm run verify:no-cloud-ai
+      - run: npm run verify:prose
       - run: npm run build

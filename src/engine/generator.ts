@@ -2,9 +2,11 @@ import fieldsData from "@/knowledge/fields.json";
 import nichesData from "@/knowledge/niches.json";
 import audiencesData from "@/knowledge/audiences.json";
 import { classify, getCategoryById } from "./classifier";
+import { extractAxes } from "./axes";
 import { generateName } from "./naming";
 import { computeAiRequired, computeDifficulty, scoreProject } from "./scoring";
 import { buildFeatures, createCopyPicker, pickBuildSize, pickTechStack, pickTechStackVariant, type CopyPicker } from "./templates";
+import { createTraceRecorder } from "./spec/trace";
 import type { AudienceDef, ClassificationResult, FieldDef, GenerationInput, NicheDef, ProjectIdea } from "@/types";
 
 const fields = fieldsData as FieldDef[];
@@ -127,17 +129,20 @@ interface BuildIdeaParams {
 function buildIdea(params: BuildIdeaParams): ProjectIdea {
   const { field, categoryId, nicheLabel, targetUsersLabel, problemText, classificationScore, hasNiche, hasTargetUsers, usedNames, copyPicker } = params;
   const categoryDef = getCategoryById(categoryId);
+  const recorder = createTraceRecorder();
+  const axes = extractAxes(problemText);
 
-  const techStackVariant = pickTechStackVariant(categoryId);
+  const techStackVariant = pickTechStackVariant(categoryId, recorder);
   const techStack = pickTechStack(field.id, techStackVariant);
-  const buildSize = pickBuildSize(categoryId);
+  const buildSize = pickBuildSize(categoryId, recorder);
   const { coreFeatures, mvpFeatures, futureFeatures } = buildFeatures(categoryId);
-  const difficulty = computeDifficulty(buildSize, techStackVariant);
-  const aiRequired = computeAiRequired(field.id, categoryId);
+  const difficulty = computeDifficulty(buildSize, techStackVariant, axes, recorder);
+  const aiRequired = computeAiRequired(field.id, categoryId, recorder);
 
   const { name, rationale: namingRationale } = generateName(
     { fieldId: field.id, categoryId, categoryName: categoryDef?.name ?? categoryId },
-    usedNames
+    usedNames,
+    recorder
   );
   usedNames.push(name);
 
@@ -157,7 +162,8 @@ function buildIdea(params: BuildIdeaParams): ProjectIdea {
     classificationScore,
     hasNiche,
     hasTargetUsers,
-    difficulty
+    difficulty,
+    axes
   });
 
   return {
@@ -185,7 +191,9 @@ function buildIdea(params: BuildIdeaParams): ProjectIdea {
     scores,
     categoryId,
     categoryName: categoryDef?.name ?? categoryId,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    axes,
+    decisions: recorder.decisions()
   };
 }
 

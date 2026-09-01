@@ -26,7 +26,15 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,woff2}"],
-        navigateFallback: "/index.html"
+        navigateFallback: "/index.html",
+        // The optional, opt-in WebLLM prose layer (Kit Depth Upgrade Stage B) pulls in a
+        // multi-MB vendor chunk + worker bundle via a runtime dynamic import — deliberately
+        // never in the main bundle, so it costs nothing for users who don't opt in. Workbox
+        // must not precache it either, or every visitor's service worker would eagerly
+        // download it on first load regardless of opt-in, defeating the entire point (and
+        // exceeding Workbox's 2MB default precache-per-file limit, which fails the build).
+        // manualChunks below gives these an identifiable name so this glob is unambiguous.
+        globIgnores: ["**/webllm-vendor-*.js", "**/webllm.worker-*.js"]
       },
       devOptions: {
         enabled: false
@@ -36,6 +44,17 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src")
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes("@mlc-ai/web-llm") || id.includes("@mlc-ai/web-tokenizers")) {
+            return "webllm-vendor";
+          }
+        }
+      }
     }
   }
 });

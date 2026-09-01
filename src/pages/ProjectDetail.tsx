@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Download, FolderArchive, Heart, PackageSearch, Sparkles } from "lucide-react";
+import { ArrowLeft, Cpu, Download, FolderArchive, Heart, PackageSearch, RefreshCw, Sparkles } from "lucide-react";
 import { Card } from "@/components/Card";
 import { Badge } from "@/components/Badge";
 import { Button } from "@/components/Button";
@@ -8,6 +8,7 @@ import { DifficultyDots } from "@/components/DifficultyDots";
 import { EmptyState } from "@/components/EmptyState";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useIdeaSession } from "@/hooks/useIdeaSession";
+import { useProseElaboration } from "@/hooks/useProseElaboration";
 import { useToast } from "@/components/Toast";
 import { findIdeaById } from "@/utils/storage";
 import { downloadMarkdown } from "@/utils/markdown";
@@ -47,6 +48,7 @@ export function ProjectDetail() {
   const { generateSimilar } = useIdeaSession();
   const { showToast } = useToast();
   const [isExportingKit, setIsExportingKit] = useState(false);
+  const prose = useProseElaboration();
 
   const idea = useMemo(() => (id ? findIdeaById(id) : undefined), [id]);
 
@@ -77,10 +79,24 @@ export function ProjectDetail() {
   async function handleExportKit() {
     setIsExportingKit(true);
     try {
-      await downloadProjectKit(idea!);
-      showToast("Planning kit downloaded");
+      const aiElaboration = prose.elaborationState === "done" ? (prose.elaboration ?? undefined) : undefined;
+      await downloadProjectKit(idea!, { aiElaboration });
+      showToast(aiElaboration ? "Planning kit downloaded (with your AI elaboration)" : "Planning kit downloaded");
     } finally {
       setIsExportingKit(false);
+    }
+  }
+
+  async function handleElaborate() {
+    const result = await prose.elaborate({
+      name: idea!.name,
+      tagline: idea!.tagline,
+      whyItShouldExist: idea!.whyItShouldExist,
+      solution: idea!.solution,
+      mvpFeatures: idea!.mvpFeatures
+    });
+    if (!result) {
+      showToast("On-device AI couldn't produce a result — your planning kit is unaffected");
     }
   }
 
@@ -141,7 +157,48 @@ export function ProjectDetail() {
             <FolderArchive size={16} />
             {isExportingKit ? "Preparing kit…" : "Export Planning Kit"}
           </Button>
+          {prose.status !== "checking" && prose.status !== "unsupported" && (
+            <Button
+              variant="secondary"
+              onClick={handleElaborate}
+              disabled={prose.elaborationState === "loading" || prose.elaborationState === "downloading"}
+            >
+              <Cpu size={16} />
+              {prose.elaborationState === "downloading"
+                ? `Downloading on-device model… ${Math.round(prose.downloadProgress * 100)}%`
+                : prose.elaborationState === "loading"
+                  ? "Elaborating…"
+                  : prose.status === "downloading"
+                    ? `Downloading on-device model… ${Math.round(prose.downloadProgress * 100)}%`
+                    : prose.status === "downloadable"
+                      ? "Download & Elaborate (on-device, first time may take a few minutes)"
+                      : "Elaborate with On-Device AI"}
+            </Button>
+          )}
         </div>
+
+        {prose.elaborationState === "done" && prose.elaboration && (
+          <div className="mt-6 rounded-2xl border border-accent/30 bg-accent/5 p-5">
+            <div className="mb-2 flex items-center justify-between">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-accent dark:text-accent-dark">
+                AI-Elaborated Summary (On-Device, Optional)
+              </h2>
+              <Button variant="ghost" size="sm" onClick={handleElaborate}>
+                <RefreshCw size={14} />
+                Regenerate
+              </Button>
+            </div>
+            <p className="text-sm leading-relaxed text-ink/90 dark:text-ink-dark/90">{prose.elaboration}</p>
+            <p className="mt-3 text-xs text-muted dark:text-muted-dark">
+              Optional, on-device only: this uses a local AI model running entirely on your device{prose.providerUsed ? ` (${prose.providerUsed})` : ""} to
+              rephrase what Project Zero already generated — nothing is sent anywhere, and nothing new is invented (every
+              response is checked against this idea's own data before being shown to you). This is separate from whether{" "}
+              <em>this idea itself</em> needs AI to build (see "AI Required" above) — it's Project Zero's own optional
+              writing assist. Review it before relying on it; small on-device models can still get things wrong. This
+              paragraph will be included as an extra file the next time you export the Planning Kit.
+            </p>
+          </div>
+        )}
 
         <div className="mt-8">
           <Section title="Naming Rationale">

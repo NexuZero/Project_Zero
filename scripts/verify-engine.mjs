@@ -111,6 +111,54 @@ for (let trial = 0; trial < 25; trial++) {
 }
 assert(duplicateTextCount === 0, "no two cards in a batch share identical tagline/why/solution text (25 trials)");
 
+// 7. Decision trace (Kit Depth Upgrade T-028): every idea carries a decision for each of
+// the 5 threaded pick points (tech stack variant, build size, naming pattern, difficulty,
+// AI required) — not 8, which was the upgrade brief's estimate before this repo's actual
+// function inventory was confirmed; 5 is the real, correct count for this codebase's
+// engine. The 3 genuinely-random picks (tech stack variant/build size/naming pattern)
+// must show >=2 real alternatives; the 2 deterministic lookups (difficulty/AI required)
+// are legitimately single-alternative by design — recording *that* a rule fired, and why,
+// not fabricating branches that were never actually in play.
+assert(
+  batch1.every((i) => Array.isArray(i.decisions) && i.decisions.length === 5),
+  "every idea carries exactly 5 decisions (tech stack variant, build size, naming pattern, difficulty, AI required)"
+);
+assert(
+  batch1.every((i) => i.decisions.every((d) => typeof d.reason === "string" && d.reason.length > 10)),
+  "every decision carries a real, non-empty reason string"
+);
+const randomSourceSubjects = ["tech stack variant", "build size", "naming pattern"];
+assert(
+  batch1.every((i) => i.decisions.filter((d) => randomSourceSubjects.includes(d.subject)).every((d) => d.alternatives.length >= 2)),
+  "every genuinely-random decision (tech stack variant / build size / naming pattern) records >=2 real alternatives"
+);
+assert(
+  batch1.every((i) => i.decisions.filter((d) => d.subject === "difficulty rating" || d.subject === "AI required").every((d) => d.isDefault === true)),
+  "deterministic lookup decisions (difficulty, AI required) are flagged isDefault"
+);
+
+// 8. Axis extraction (T-029): axes actually respond to varied problem text, not a single
+// constant vector regardless of input. Deliberately varied inputs, each hand-picked to hit
+// different axis keywords — one idea per input (axes are per-batch, derived once from the
+// batch's own problem text, same for all 10 cards in a single generateProjects() call).
+const axisProbeInputs = [
+  "I need to migrate our old spreadsheet data once, just for myself, nothing fancy.",
+  "Alert me in real-time the moment a production incident happens across our team's services.",
+  "Generate a weekly report summarizing what happened, for my small team.",
+  "A compliance dashboard that logs every access for audit purposes — this touches sensitive PII.",
+  "Just a personal hobby tool to rank my reading list, only I will ever use it.",
+  "Pull data from a third-party API on a schedule and notify everyone in the company.",
+  "A public tool anyone can use to decide which option to pick, based on live sensor data.",
+  "Historical review of past incidents, exported as a downloadable file for the whole team."
+];
+const axisVectors = new Set(
+  axisProbeInputs.map((problem) => {
+    const [idea] = generateProjects({ fieldId: "Productivity", niche: "", problem, targetUsers: "" }, { count: 1 });
+    return JSON.stringify(idea.axes);
+  })
+);
+assert(axisVectors.size >= 6, `varied problem text produces varied axis vectors (${axisVectors.size}/${axisProbeInputs.length} distinct, want >=6)`);
+
 await fs.unlink(tmpFile).catch(() => {});
 
 console.log(failures === 0 ? "\nAll engine checks passed." : `\n${failures} check(s) FAILED.`);

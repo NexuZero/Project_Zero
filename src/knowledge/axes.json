@@ -1,0 +1,192 @@
+{
+  "temporality": [
+    {
+      "id": "one-shot",
+      "keywords": [
+        { "term": "one-time", "weight": 3 }, { "term": "one time", "weight": 3 }, { "term": "once", "weight": 2 },
+        { "term": "single run", "weight": 3 }, { "term": "migrate", "weight": 2 }, { "term": "migration", "weight": 2 },
+        { "term": "batch job", "weight": 2 }, { "term": "import once", "weight": 3 }, { "term": "convert", "weight": 1 }
+      ]
+    },
+    {
+      "id": "scheduled",
+      "keywords": [
+        { "term": "every day", "weight": 3 }, { "term": "daily", "weight": 3 }, { "term": "weekly", "weight": 3 },
+        { "term": "on a schedule", "weight": 3 }, { "term": "scheduled", "weight": 2 }, { "term": "cron", "weight": 2 },
+        { "term": "recurring", "weight": 2 }, { "term": "periodically", "weight": 2 }, { "term": "nightly", "weight": 2 },
+        { "term": "each week", "weight": 2 }, { "term": "every month", "weight": 2 }
+      ]
+    },
+    {
+      "id": "real-time",
+      "keywords": [
+        { "term": "real-time", "weight": 3 }, { "term": "real time", "weight": 3 }, { "term": "realtime", "weight": 3 },
+        { "term": "live", "weight": 2 }, { "term": "instantly", "weight": 2 }, { "term": "as it happens", "weight": 3 },
+        { "term": "streaming", "weight": 2 }, { "term": "immediately", "weight": 2 }, { "term": "right away", "weight": 2 }
+      ]
+    },
+    {
+      "id": "retrospective",
+      "keywords": [
+        { "term": "after the fact", "weight": 3 }, { "term": "post-mortem", "weight": 3 }, { "term": "postmortem", "weight": 3 },
+        { "term": "historical", "weight": 2 }, { "term": "audit trail", "weight": 3 }, { "term": "looking back", "weight": 2 },
+        { "term": "review past", "weight": 2 }, { "term": "history of", "weight": 2 }, { "term": "past incidents", "weight": 2 }
+      ]
+    }
+  ],
+  "interaction": [
+    {
+      "id": "background",
+      "keywords": [
+        { "term": "automatically", "weight": 3 }, { "term": "in the background", "weight": 3 }, { "term": "without me", "weight": 2 },
+        { "term": "hands-off", "weight": 3 }, { "term": "hands off", "weight": 3 }, { "term": "unattended", "weight": 2 },
+        { "term": "runs by itself", "weight": 3 }, { "term": "no manual", "weight": 2 }, { "term": "set and forget", "weight": 3 }
+      ]
+    },
+    {
+      "id": "on-demand",
+      "keywords": [
+        { "term": "when I need it", "weight": 3 }, { "term": "on demand", "weight": 3 }, { "term": "manually trigger", "weight": 3 },
+        { "term": "click a button", "weight": 2 }, { "term": "ask for it", "weight": 2 }, { "term": "on request", "weight": 2 },
+        { "term": "whenever I want", "weight": 2 }
+      ]
+    },
+    {
+      "id": "collaborative",
+      "keywords": [
+        { "term": "team", "weight": 2 }, { "term": "together", "weight": 1 }, { "term": "share with", "weight": 2 },
+        { "term": "collaborate", "weight": 3 }, { "term": "multiple people", "weight": 3 }, { "term": "co-workers", "weight": 2 },
+        { "term": "coworkers", "weight": 2 }, { "term": "with my team", "weight": 3 }
+      ]
+    }
+  ],
+  "dataOrigin": [
+    {
+      "id": "entered",
+      "keywords": [
+        { "term": "type in", "weight": 2 }, { "term": "manually enter", "weight": 3 }, { "term": "fill out", "weight": 2 },
+        { "term": "a form", "weight": 2 }, { "term": "typed input", "weight": 2 }, { "term": "enter data", "weight": 2 }
+      ]
+    },
+    {
+      "id": "imported",
+      "keywords": [
+        { "term": "import", "weight": 3 }, { "term": "upload", "weight": 2 }, { "term": "csv", "weight": 3 },
+        { "term": "spreadsheet", "weight": 2 }, { "term": "existing data", "weight": 2 }, { "term": "bulk load", "weight": 2 }
+      ]
+    },
+    {
+      "id": "fetched",
+      "keywords": [
+        { "term": "api", "weight": 3 }, { "term": "fetch from", "weight": 2 }, { "term": "pull from", "weight": 2 },
+        { "term": "integrate with", "weight": 3 }, { "term": "connect to", "weight": 2 }, { "term": "sync from", "weight": 3 },
+        { "term": "third-party", "weight": 2 }, { "term": "webhook", "weight": 3 }
+      ]
+    },
+    {
+      "id": "sensed",
+      "keywords": [
+        { "term": "sensor", "weight": 3 }, { "term": "device", "weight": 1 }, { "term": "iot", "weight": 3 },
+        { "term": "detect", "weight": 1 }, { "term": "monitor hardware", "weight": 3 }, { "term": "physical", "weight": 1 }
+      ]
+    },
+    {
+      "id": "derived",
+      "keywords": [
+        { "term": "calculated from", "weight": 3 }, { "term": "computed", "weight": 2 }, { "term": "derived from", "weight": 3 },
+        { "term": "aggregate", "weight": 2 }, { "term": "aggregated", "weight": 2 }, { "term": "combine data", "weight": 2 }
+      ]
+    }
+  ],
+  "outputArtifact": [
+    {
+      "id": "alert",
+      "keywords": [
+        { "term": "alert", "weight": 3 }, { "term": "notify", "weight": 2 }, { "term": "notification", "weight": 2 },
+        { "term": "warn", "weight": 2 }, { "term": "page someone", "weight": 3 }, { "term": "flag", "weight": 1 }
+      ]
+    },
+    {
+      "id": "report",
+      "keywords": [
+        { "term": "report", "weight": 3 }, { "term": "summary", "weight": 2 }, { "term": "digest", "weight": 2 },
+        { "term": "write-up", "weight": 2 }
+      ]
+    },
+    {
+      "id": "dashboard",
+      "keywords": [
+        { "term": "dashboard", "weight": 3 }, { "term": "at a glance", "weight": 2 }, { "term": "visualize", "weight": 2 },
+        { "term": "overview screen", "weight": 3 }, { "term": "see everything", "weight": 2 }
+      ]
+    },
+    {
+      "id": "file",
+      "keywords": [
+        { "term": "export", "weight": 2 }, { "term": "download", "weight": 2 }, { "term": "generate a file", "weight": 3 },
+        { "term": "pdf", "weight": 2 }, { "term": "csv export", "weight": 3 }
+      ]
+    },
+    {
+      "id": "ranked-list",
+      "keywords": [
+        { "term": "rank", "weight": 2 }, { "term": "prioritize", "weight": 3 }, { "term": "sorted list", "weight": 3 },
+        { "term": "leaderboard", "weight": 3 }, { "term": "top", "weight": 1 }
+      ]
+    },
+    {
+      "id": "decision",
+      "keywords": [
+        { "term": "decide", "weight": 2 }, { "term": "approve", "weight": 2 }, { "term": "recommend", "weight": 2 },
+        { "term": "should i", "weight": 2 }, { "term": "go/no-go", "weight": 3 }
+      ]
+    }
+  ],
+  "stakes": [
+    {
+      "id": "casual",
+      "keywords": [
+        { "term": "personal", "weight": 2 }, { "term": "hobby", "weight": 3 }, { "term": "side project", "weight": 3 },
+        { "term": "just for me", "weight": 2 }, { "term": "for fun", "weight": 2 }
+      ]
+    },
+    {
+      "id": "operational",
+      "keywords": [
+        { "term": "business", "weight": 2 }, { "term": "team relies on", "weight": 3 }, { "term": "production", "weight": 2 },
+        { "term": "customers", "weight": 2 }, { "term": "revenue", "weight": 2 }, { "term": "critical", "weight": 2 }
+      ]
+    },
+    {
+      "id": "regulated",
+      "keywords": [
+        { "term": "compliance", "weight": 3 }, { "term": "audit", "weight": 2 }, { "term": "gdpr", "weight": 3 },
+        { "term": "hipaa", "weight": 3 }, { "term": "pii", "weight": 3 }, { "term": "regulated", "weight": 3 },
+        { "term": "legal requirement", "weight": 3 }, { "term": "sensitive data", "weight": 2 }, { "term": "personal data", "weight": 2 }
+      ]
+    }
+  ],
+  "scale": [
+    {
+      "id": "single-user",
+      "keywords": [
+        { "term": "just me", "weight": 3 }, { "term": "solo", "weight": 2 }, { "term": "personal use", "weight": 3 },
+        { "term": "myself", "weight": 2 }, { "term": "only i", "weight": 2 }
+      ]
+    },
+    {
+      "id": "team",
+      "keywords": [
+        { "term": "my team", "weight": 3 }, { "term": "small team", "weight": 3 }, { "term": "coworkers", "weight": 2 },
+        { "term": "co-workers", "weight": 2 }, { "term": "department", "weight": 2 }, { "term": "our company", "weight": 2 }
+      ]
+    },
+    {
+      "id": "public",
+      "keywords": [
+        { "term": "public", "weight": 2 }, { "term": "everyone", "weight": 2 }, { "term": "anyone can", "weight": 3 },
+        { "term": "open to the internet", "weight": 3 }, { "term": "general public", "weight": 3 }, { "term": "all users", "weight": 2 }
+      ]
+    }
+  ]
+}

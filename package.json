@@ -35,9 +35,13 @@
     "typecheck": "tsc -b",
     "lint": "eslint .",
     "verify:engine": "node scripts/verify-engine.mjs",
-    "verify:kit": "node scripts/verify-kit.mjs"
+    "verify:kit": "node scripts/verify-kit.mjs",
+    "verify:on-device-ai": "node scripts/verify-on-device-ai.mjs",
+    "verify:no-cloud-ai": "node scripts/verify-no-cloud-ai.mjs",
+    "verify:prose": "node scripts/verify-prose.mjs"
   },
   "dependencies": {
+    "@mlc-ai/web-llm": "0.2.84",
     "jszip": "^3.10.1",
     "lucide-react": "^0.462.0",
     "react": "^18.3.1",

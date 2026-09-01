@@ -1,5 +1,6 @@
 import problemTypesData from "@/knowledge/problem_types.json";
 import type { ClassificationResult, ProblemTypeDef } from "@/types";
+import { scoreKeywordSets } from "./keywordScore";
 
 const problemTypes = problemTypesData as ProblemTypeDef[];
 
@@ -12,22 +13,11 @@ const FALLBACK_CATEGORY_IDS = ["organization", "productivity", "tracking"];
  * the input text, then normalizes to a 0-100 scale.
  */
 export function classify(problemText: string): ClassificationResult[] {
-  const text = problemText.toLowerCase();
-
-  const raw = problemTypes.map((category) => {
-    let score = 0;
-    for (const kw of category.keywords) {
-      if (text.includes(kw.term.toLowerCase())) {
-        score += kw.weight;
-      }
-    }
-    return { categoryId: category.id, score };
-  });
-
-  const maxScore = Math.max(...raw.map((r) => r.score), 1);
-  let results: ClassificationResult[] = raw
-    .map((r) => ({ categoryId: r.categoryId, score: Math.round((r.score / maxScore) * 100) }))
-    .sort((a, b) => b.score - a.score);
+  const scored = scoreKeywordSets(
+    problemText,
+    problemTypes.map((category) => ({ id: category.id, keywords: category.keywords }))
+  );
+  let results: ClassificationResult[] = scored.map((r) => ({ categoryId: r.id, score: r.score }));
 
   const hasSignal = results.some((r) => r.score > 0);
   if (!hasSignal) {

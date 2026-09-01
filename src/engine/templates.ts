@@ -1,7 +1,8 @@
 import capabilitiesData from "@/knowledge/capabilities.json";
 import techStacksData from "@/knowledge/tech_stacks.json";
 import projectTemplatesData from "@/knowledge/project_templates.json";
-import type { BuildSize, CapabilitiesMap, CategoryTemplate, ProjectTemplatesMap, TechStackVariant, TechStacksMap } from "@/types";
+import type { BuildSize, CapabilitiesMap, CategoryTemplate, DecisionSource, ProjectTemplatesMap, TechStackVariant, TechStacksMap } from "@/types";
+import type { TraceRecorder } from "./spec/trace";
 
 const capabilities = capabilitiesData as CapabilitiesMap;
 const techStacks = techStacksData as TechStacksMap;
@@ -30,11 +31,65 @@ function pickMany<T>(arr: T[], count: number): T[] {
   return shuffled.slice(0, Math.min(count, arr.length));
 }
 
-export function pickTechStackVariant(categoryId: string): TechStackVariant {
-  const roll = Math.random();
-  if (CLI_LEANING.has(categoryId)) return roll < 0.7 ? "cli" : roll < 0.9 ? "browserOnly" : "webDashboard";
-  if (DASHBOARD_LEANING.has(categoryId)) return roll < 0.7 ? "webDashboard" : roll < 0.9 ? "browserOnly" : "cli";
-  return roll < 0.6 ? "browserOnly" : roll < 0.85 ? "webDashboard" : "cli";
+/** Weighted pick that records the roll (chosen + full alternative pool + why) at the point it happens. */
+function weightedPick<T extends string>(
+  recorder: TraceRecorder,
+  subject: string,
+  options: { value: T; weight: number }[],
+  reason: string,
+  isDefault: boolean,
+  source: DecisionSource
+): T {
+  const total = options.reduce((sum, o) => sum + o.weight, 0);
+  let roll = Math.random() * total;
+  let chosen = options[options.length - 1].value;
+  for (const o of options) {
+    roll -= o.weight;
+    if (roll <= 0) {
+      chosen = o.value;
+      break;
+    }
+  }
+  recorder.record({
+    subject,
+    chosen,
+    alternatives: options.map((o) => ({ value: o.value, weight: o.weight })),
+    reason,
+    isDefault,
+    source
+  });
+  return chosen;
+}
+
+export function pickTechStackVariant(categoryId: string, recorder: TraceRecorder): TechStackVariant {
+  const isCliLeaning = CLI_LEANING.has(categoryId);
+  const isDashboardLeaning = DASHBOARD_LEANING.has(categoryId);
+
+  const options: { value: TechStackVariant; weight: number }[] = isCliLeaning
+    ? [
+        { value: "cli", weight: 0.7 },
+        { value: "browserOnly", weight: 0.2 },
+        { value: "webDashboard", weight: 0.1 }
+      ]
+    : isDashboardLeaning
+      ? [
+          { value: "webDashboard", weight: 0.7 },
+          { value: "browserOnly", weight: 0.2 },
+          { value: "cli", weight: 0.1 }
+        ]
+      : [
+          { value: "browserOnly", weight: 0.6 },
+          { value: "webDashboard", weight: 0.25 },
+          { value: "cli", weight: 0.15 }
+        ];
+
+  const reason = isCliLeaning
+    ? `"${categoryId}" leans CLI-first (automation/developer-experience/documentation/integration categories favor scriptable tools over dashboards).`
+    : isDashboardLeaning
+      ? `"${categoryId}" leans toward a full web dashboard (monitoring/management/visualization/analysis/detection/reliability benefit from an always-visible view).`
+      : `"${categoryId}" has no strong CLI or dashboard lean, so a browser-only client is weighted heaviest as the simplest default to build and host.`;
+
+  return weightedPick(recorder, "tech stack variant", options, reason, !isCliLeaning && !isDashboardLeaning, "category");
 }
 
 export function pickTechStack(fieldId: string, variant: TechStackVariant): string[] {
@@ -52,15 +107,14 @@ const BUILD_SIZE_WEIGHTS: Record<string, number[]> = {
   default: [0.2, 0.4, 0.3, 0.1]
 };
 
-export function pickBuildSize(categoryId: string): BuildSize {
+export function pickBuildSize(categoryId: string, recorder: TraceRecorder): BuildSize {
+  const isDefault = !(categoryId in BUILD_SIZE_WEIGHTS);
   const weights = BUILD_SIZE_WEIGHTS[categoryId] ?? BUILD_SIZE_WEIGHTS.default;
-  const roll = Math.random();
-  let cumulative = 0;
-  for (let i = 0; i < weights.length; i++) {
-    cumulative += weights[i];
-    if (roll <= cumulative) return BUILD_SIZES[i];
-  }
-  return "Small";
+  const options = BUILD_SIZES.map((value, i) => ({ value, weight: weights[i] }));
+  const reason = isDefault
+    ? `"${categoryId}" has no dedicated build-size weighting, so the default distribution applies (biased toward Small/Medium).`
+    : `"${categoryId}" has its own build-size distribution — reflects how scoped projects in this category typically are.`;
+  return weightedPick(recorder, "build size", options, reason, isDefault, "category");
 }
 
 export interface FeatureSet {

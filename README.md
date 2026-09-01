@@ -7,7 +7,7 @@
 
 Project Zero is a lightweight, offline-first "project idea engine." Describe a field, a niche, and a problem, and it generates 10 structured, buildable, open-source project concepts — complete with features, an MVP scope, a suggested tech stack, and a GitHub-ready description.
 
-There is no API key, no account, no cloud AI, and no network request in the core flow. The entire generation engine is a local, rule-based, data-driven system that runs in your browser.
+There is no API key, no account, no cloud AI, and no network request in the core flow. The entire generation engine is a local, rule-based, data-driven system that runs in your browser. An optional, opt-in layer can additionally run a small language model **entirely on your own device** to polish exported prose — never required, never cloud, never on by default.
 
 > Your ideas stay on your device.
 
@@ -90,7 +90,7 @@ Documented rather than hidden, per this project's own build-quality bar:
 - App icons ship as SVG (crisp, zero extra build tooling). iOS's "Add to Home Screen" prefers a PNG `apple-touch-icon`; SVG works everywhere else (Chrome/Edge/Android install prompts). A PNG icon set is a good first contribution — see [`docs/CONTRIBUTING_KNOWLEDGE.md`](docs/CONTRIBUTING_KNOWLEDGE.md).
 - `npm audit` reports advisories in `esbuild` (dev-server only — doesn't affect the built app) and `react-router` (an open-redirect vector that requires a user-supplied navigation target; every route in this app is fixed and code-defined, so it isn't reachable here). Full detail in [`SECURITY.md`](SECURITY.md). Fixing either is a breaking major-version upgrade, deferred to v0.2 by design rather than rushed in.
 - `npm run verify:engine` runs a real, assertion-based smoke test of the generation engine (10-distinct-results, no-repeat regeneration, Surprise Me, score bounds, unknown-field handling) — but there's no component/UI test suite yet (Vitest for components, Playwright for the four screens). See [`CONTRIBUTING.md`](CONTRIBUTING.md) for where that would plug in.
-- Local-LLM support (Ollama / WebLLM / Transformers.js) is intentionally not implemented — the architecture leaves room for it later, but the rule engine must always work fully offline with zero AI, by design.
+- Local-LLM support exists as an **optional, opt-in enhancement layer only** — Chrome's built-in on-device model (Prompt API) already ships for a single-paragraph idea elaboration, and an in-browser WebLLM provider is being added for richer Planning Kit prose. Neither is ever required: the rule engine in `src/engine/` always works fully offline with zero AI, by design, and every on-device provider is additive polish behind a grounding check that discards anything not already backed by real generated data.
 
 ## Roadmap
 

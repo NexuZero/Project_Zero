@@ -1,6 +1,7 @@
 import namingData from "@/knowledge/naming_patterns.json";
 import fieldsData from "@/knowledge/fields.json";
 import type { FieldDef, NamingPatterns } from "@/types";
+import type { TraceRecorder } from "./spec/trace";
 
 const naming = namingData as NamingPatterns;
 const fields = fieldsData as FieldDef[];
@@ -172,13 +173,37 @@ export interface GeneratedName {
 }
 
 /**
+ * Records the naming-pattern decision from the winning candidate's already-computed
+ * parts — same data composeRationale() draws from, so the decision trace can never
+ * contradict the naming rationale shown in the UI. Recorded once, after resolution,
+ * rather than threaded into buildCandidate()'s 60-attempt retry loop (only the winning
+ * candidate's pick is a real "decision"; discarded attempts aren't).
+ */
+function recordNamingDecision(recorder: TraceRecorder, parts: NameParts): void {
+  const chosen = parts.pattern === "suffix" ? `suffix "${parts.modifierWord}"` : parts.pattern === "prefix" ? `prefix "${parts.modifierWord}"` : `brand ending "${parts.modifierWord}"`;
+  recorder.record({
+    subject: "naming pattern",
+    chosen,
+    alternatives: [
+      { value: "suffix", weight: 0.6 },
+      { value: "prefix", weight: 0.25 },
+      { value: "brand", weight: 0.15 }
+    ],
+    reason: `Keyword "${parts.keyword}" (${keywordClause(parts)}) paired with the ${parts.pattern} "${parts.modifierWord}" — signals ${parts.modifierMeaning}.`,
+    isDefault: false,
+    source: "random"
+  });
+}
+
+/**
  * Generates one GitHub-friendly project name that hasn't appeared in
  * `excludeNames` (case-insensitive), never repeating within a session, plus a
  * plain-language explanation of why the name was built the way it was.
  */
 export function generateName(
   seed: { fieldId: string; categoryId: string; categoryName: string },
-  excludeNames: string[]
+  excludeNames: string[],
+  recorder: TraceRecorder
 ): GeneratedName {
   const used = new Set(excludeNames.map((n) => n.toLowerCase()));
   const maxLen = naming.maxNameLength;
@@ -186,6 +211,7 @@ export function generateName(
   for (let attempt = 0; attempt < 60; attempt++) {
     const candidate = buildCandidate(seed.fieldId, seed.categoryId, seed.categoryName);
     if (candidate.name.length <= maxLen && !used.has(candidate.name.toLowerCase())) {
+      recordNamingDecision(recorder, candidate.parts);
       return { name: candidate.name, rationale: composeRationale(candidate.parts) };
     }
   }
@@ -199,5 +225,6 @@ export function generateName(
     candidate.parts.extraDisambiguationWords.push(extra);
     guard++;
   }
+  recordNamingDecision(recorder, candidate.parts);
   return { name: candidate.name, rationale: composeRationale(candidate.parts) };
 }

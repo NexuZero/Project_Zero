@@ -24,8 +24,10 @@ async function bundleAndImport(entryRelativePath, tmpName) {
 
 const { mod: generatorMod, tmpFile: generatorTmp } = await bundleAndImport("src/engine/generator.ts", ".verify-kit-generator-bundle.mjs");
 const { mod: kitMod, tmpFile: kitTmp } = await bundleAndImport("src/utils/projectKit.ts", ".verify-kit-kit-bundle.mjs");
+const { mod: specMod, tmpFile: specTmp } = await bundleAndImport("src/engine/spec/ideaSpec.ts", ".verify-kit-spec-bundle.mjs");
 const { generateProjects } = generatorMod;
 const { buildProjectKit } = kitMod;
+const { buildIdeaSpec } = specMod;
 
 let failures = 0;
 function assert(condition, message) {
@@ -110,9 +112,56 @@ assert(prd.includes(sampleIdea.namingRationale), "PRD includes the idea's real n
 assert(readme.includes(sampleIdea.openSourcePotential) && readme.includes(sampleIdea.communityValue), "README includes openSourcePotential and communityValue verbatim");
 assert(readme.includes("Idea generated:") && readme.includes("Kit exported:"), "README distinguishes idea-generation date from kit-export date");
 
-// 4. Schema/API-contract honesty fixes: worksheet table present, no fabricated mapping.
+// 4. IdeaSpec fact-expansion (Kit Depth Upgrade T-030/T-031): Schema/API-contract carry
+// real derived entity data, not a generic fill-in-the-blank worksheet — the previous
+// worksheet pattern was the *problem* this upgrade fixed, not the target to preserve.
 const schema = files["05-SCHEMA.md"];
-assert(schema.includes("Touched by which MVP feature(s)?") && schema.includes("_(fill in"), "Schema doc presents entities as a fill-in worksheet, not a fabricated mapping");
+assert(sampleIdea.decisions.length === 5, "each generated idea carries its 5-decision trace (tech stack variant, build size, naming pattern, difficulty, AI required)");
+const sampleSpec = buildIdeaSpec(sampleIdea);
+assert(sampleSpec.entities.length >= 3, "IdeaSpec derives at least the category-default 3 entities");
+assert(sampleSpec.entities.every((e) => e.fields.length > 0), "every derived entity has real typed fields, not just a bare name");
+assert(schema.includes(sampleSpec.entities[0].name) && schema.includes(sampleSpec.entities[0].fields[0].name), "Schema doc renders the real first entity's name and a real field name, not a placeholder");
+assert(!schema.includes("_(fill in"), "Schema doc no longer falls back to the old fill-in-the-blank worksheet now that real entity data exists");
+
+const trd = files["02-TRD.md"];
+assert(trd.includes("## Key decisions"), "TRD renders a Key decisions section from the idea's own decision trace");
+assert(sampleIdea.decisions.every((d) => trd.includes(d.chosen)), "every decision's chosen value appears verbatim in the TRD");
+
+// Facts-per-IdeaSpec acceptance bar (sequencing discipline in the plan: if this doesn't
+// clear a real floor, Stage A's derivation rules aren't firing meaningfully).
+function countFacts(spec) {
+  let count = 0;
+  count += spec.entities.reduce((sum, e) => sum + 1 + e.fields.length * 2 + e.relations.length, 0); // name + (field name+type) + relations
+  count += spec.screens.reduce((sum, s) => sum + 2 + Object.keys(s.states).length, 0); // name + purpose + 5 states
+  count += spec.routes.length;
+  count += spec.moduleSurface.length * 3;
+  count += spec.risks.length * 4;
+  count += spec.notApplicable.length * 2;
+  count += spec.validationRules.length * 3;
+  count += spec.tasks.length * 4;
+  count += Object.keys(spec.idea).length; // the base ProjectIdea's own ~20 fields
+  count += spec.idea.decisions.length * 4; // chosen + alternatives + reason + isDefault
+  return count;
+}
+const factCounts = fixtures.slice(0, 5).map((i) => countFacts(buildIdeaSpec(i)));
+assert(factCounts.every((c) => c >= 100), `every sampled idea's IdeaSpec carries >=100 discrete facts (got: ${factCounts.join(", ")}) — well above the ~20 raw ProjectIdea fields alone`);
+
+// Client-only ideas get a real module-boundary contract in Doc 6, not "not applicable".
+const clientOnlyFixture = fixtures.find((i) => buildIdeaSpec(i).moduleSurface.length > 0);
+if (clientOnlyFixture) {
+  const apiDoc = buildProjectKit(clientOnlyFixture)["06-API-CONTRACT.md"];
+  assert(apiDoc.includes("Module Boundary Contract") && !apiDoc.includes("Not applicable (by design)"), "a client-only idea's API Contract doc is a real module-boundary contract, not the old blanket not-applicable text");
+}
+
+// Every IdeaSpec section is derived, category-default (labelled), or not-applicable-with-a-
+// reason — never silently omitted. Spot-check: RLS is always addressed one way or another.
+assert(
+  fixtures.every((i) => {
+    const s = buildIdeaSpec(i);
+    return s.notApplicable.some((na) => na.section === "Row-level security / permissions") || s.provenance["section:rls"] === "axis";
+  }),
+  "Row-level security is always either explicitly not-applicable-with-a-reason or addressed by real entities — never silently skipped"
+);
 
 // 5. Part 1.5 — optional AI elaboration threading (pure, synchronous, tested with a fixture string).
 const withoutAi = buildProjectKit(sampleIdea);
@@ -131,6 +180,7 @@ assert(Object.keys(emptyAi).length === 11, "a whitespace-only aiElaboration is t
 
 await fs.unlink(generatorTmp).catch(() => {});
 await fs.unlink(kitTmp).catch(() => {});
+await fs.unlink(specTmp).catch(() => {});
 
 console.log(failures === 0 ? "\nAll planning-kit checks passed." : `\n${failures} check(s) FAILED.`);
 process.exit(failures === 0 ? 0 : 1);
