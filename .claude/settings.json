@@ -32,7 +32,8 @@
       "Bash(unzip -q kit.zip -d kit-extracted)",
       "Bash(rm -rf kit-extracted2)",
       "Bash(mkdir kit-extracted2 *)",
-      "Bash(unzip -q kit.zip -d kit-extracted2)"
+      "Bash(unzip -q kit.zip -d kit-extracted2)",
+      "Bash(node -e \"const i = require\\('lucide-react'\\); console.log\\('RefreshCw:', 'RefreshCw' in i, '| RotateCw:', 'RotateCw' in i, '| Loader2:', 'Loader2' in i\\);\")"
     ]
   }
 }
